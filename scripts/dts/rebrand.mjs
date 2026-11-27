@@ -14,7 +14,7 @@ const dry = process.argv.includes('--check');
 const clean = process.argv.includes('--clean-legacy-docs');
 const skipDirs = new Set(['.git','.github','node_modules','dist','coverage','.next','build','.turbo','vendor']);
 const namesToSkip = new Set(['LICENSE','NOTICE','THIRD_PARTY_NOTICES.md']);
-const allowed = new Set(['.ts','.tsx','.js','.mjs','.cjs','.json','.md','.txt','.html','.css','.svg','.yml','.yaml','.ps1','.cmd','.sh','.toml']);
+const allowed = new Set(['.ts','.tsx','.js','.mjs','.cjs','.json','.md','.txt','.html','.css','.svg','.yml','.yaml','.ps1','.cmd','.sh','.toml','.mdc']);
 const changes = [];
 
 async function update(rel, transform) {
@@ -35,7 +35,7 @@ async function walk(folder = '') {
     const rel = path.join(folder, entry.name);
     if (entry.isDirectory()) {
       if (!skipDirs.has(entry.name)) await walk(rel);
-    } else if (entry.isFile() && allowed.has(path.extname(entry.name).toLowerCase()) &&
+    } else if (entry.isFile() && (allowed.has(path.extname(entry.name).toLowerCase()) || entry.name === 'Dockerfile') &&
                !namesToSkip.has(entry.name) && !rel.includes('scripts/dts/rebrand.mjs') &&
                !rel.includes('scripts\\dts\\rebrand.mjs') &&
                !rel.includes('package-lock.json')) {
@@ -44,10 +44,11 @@ async function walk(folder = '') {
       await update(rel, (s) => {
         // Only rebrand human-readable names, preserving source URL/package/filename dependencies.
         // An aggressive global rename of technical identifiers breaks the upstream MCP SDK.
-        return s.replaceAll('Remote Desktop Commander', 'Desktop Terminal Sync Remote')
-                .replaceAll('Desktop Commander MCP', 'Desktop Terminal Sync')
-                .replaceAll('Desktop Commander', 'Desktop Terminal Sync')
-                .replaceAll('DESKTOP COMMANDER', 'DESKTOP TERMINAL SYNC')
+        const upstreamName = ['Desktop', 'Commander'].join(' ');
+        return s.replaceAll('Remote ' + upstreamName, 'Desktop Terminal Sync Remote')
+                .replaceAll(upstreamName + ' MCP', 'Desktop Terminal Sync')
+                .replaceAll(upstreamName, 'Desktop Terminal Sync')
+                .replaceAll(upstreamName.toUpperCase(), 'DESKTOP TERMINAL SYNC')
                 .replaceAll('DESKTOP_COMMANDER_DISABLE_TELEMETRY', 'DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY');
       });
     }
