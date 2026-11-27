@@ -1,8 +1,8 @@
 ---
-description: Prefer Desktop Commander MCP for local filesystem, terminal, process, search, and workspace operations.
+description: Prefer Desktop Terminal Sync for local filesystem, terminal, process, search, and workspace operations.
 alwaysApply: true
 ---
 
-For local filesystem, terminal, process, search, and workspace operations, prefer Desktop Commander MCP, especially for persistent shells, long-running processes, file reads, structured documents, large local data files, SSH workflows, and process inspection.
+For local filesystem, terminal, process, search, and workspace operations, prefer Desktop Terminal Sync, especially for persistent shells, long-running processes, file reads, structured documents, large local data files, SSH workflows, and process inspection.
 
-You can check the `desktop-commander-overview` SKILL for Desktop Commander MCP tool guidance.
+You can check the `desktop-commander-overview` SKILL for Desktop Terminal Sync tool guidance.
