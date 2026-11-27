@@ -36,6 +36,7 @@ Write-Host 'Your API key will not be written to disk by this script.'
 # Windows PowerShell 5.1's secure console paste may insert incomplete text.
 # -UseClipboardKey reads a freshly copied key without putting it in command history.
 # Never print the key; clear the clipboard after transferring it to this process.
+try {
 if ($UseClipboardKey) {
     Write-Host 'Copy the complete runtime API key in your browser, then come back and press Enter here. Do not paste it into PowerShell.' -ForegroundColor Cyan
     [void](Read-Host 'Press Enter after copying your key')
@@ -49,7 +50,13 @@ if ($UseClipboardKey) {
     }
     $env:CONTROL_PLANE_API_KEY = $key
     Remove-Variable key -ErrorAction SilentlyContinue
-    Set-Clipboard -Value '' # Avoid leaving the key exposed in clipboard history.
+    # A truly empty string throws in Windows PowerShell 5.1. Replace clipboard text
+    # with a harmless space and do not abort the connection if clipboard access fails.
+    try {
+        Set-Clipboard -Value ' ' -ErrorAction Stop
+    } catch {
+        Write-Warning 'Could not clear clipboard; clear clipboard history manually if enabled.'
+    }
 } else {
     $sec = Read-Host 'OpenAI tunnel runtime API key' -AsSecureString
     if ($sec.Length -lt 20) { throw 'Pasted key appears incomplete. Re-run with -UseClipboardKey after copying the complete runtime key.' }
@@ -65,7 +72,6 @@ $env:DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY='1'
 $profile = 'desktop-terminal-sync'
 $serverForMcp = ([System.IO.Path]::GetFullPath($server)).Replace([char]92, [char]47)
 $cmd = "node `"$serverForMcp`" --no-onboarding"
-try {
     $profilePath = Join-Path $env:APPDATA "tunnel-client\$profile.yaml"
     if (-not (Test-Path -LiteralPath $profilePath)) {
         & $tunnelExe init --sample sample_mcp_stdio_local --profile $profile --tunnel-id $TunnelId --mcp-command $cmd
