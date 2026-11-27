@@ -66,8 +66,13 @@ $profile = 'desktop-terminal-sync'
 $serverForMcp = ([System.IO.Path]::GetFullPath($server)).Replace([char]92, [char]47)
 $cmd = "node `"$serverForMcp`" --no-onboarding"
 try {
-    & $tunnelExe init --sample sample_mcp_stdio_local --profile $profile --tunnel-id $TunnelId --mcp-command $cmd
-    if ($LASTEXITCODE -ne 0) { throw 'Tunnel profile creation failed. Check CLI help and permissions.' }
+    $profilePath = Join-Path $env:APPDATA "tunnel-client\$profile.yaml"
+    if (-not (Test-Path -LiteralPath $profilePath)) {
+        & $tunnelExe init --sample sample_mcp_stdio_local --profile $profile --tunnel-id $TunnelId --mcp-command $cmd
+        if ($LASTEXITCODE -ne 0) { throw 'Tunnel profile creation failed. Check CLI help and permissions.' }
+    } else {
+        Write-Host "Reusing tunnel profile: $profilePath" -ForegroundColor Green
+    }
     & $tunnelExe doctor --profile $profile --explain
     if ($LASTEXITCODE -ne 0) { throw 'Tunnel diagnostics failed.' }
     Write-Host 'Tunnel health checked. Leave this terminal running and add a custom MCP plugin in ChatGPT (Connection: Tunnel).' -ForegroundColor Green
