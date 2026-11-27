@@ -94,13 +94,13 @@ if (-not (Test-Path -LiteralPath $configPath)) {
         welcomeOnboardingEligible = $false
         pendingWelcomeOnboarding = $false
     }
-    [IO.File]::WriteAllText($configPath, ($config | ConvertTo-Json -Depth 5), (New-Object System.Text.UTF8Encoding($false)))
+    [IO.File]::WriteAllText($configPath, ($config | ConvertTo-Json -Depth 5), [System.Text.UTF8Encoding]::new($false))
     Write-Host "Created scoped configuration: $configPath"
 } else {
     # Protect user preferences; only enforce disabled telemetry on reinstallation.
     $config = Get-Content -LiteralPath $configPath -Raw | ConvertFrom-Json
     $config | Add-Member -NotePropertyName 'telemetryEnabled' -NotePropertyValue $false -Force
-    [IO.File]::WriteAllText($configPath, ($config | ConvertTo-Json -Depth 20), (New-Object System.Text.UTF8Encoding($false)))
+    [IO.File]::WriteAllText($configPath, ($config | ConvertTo-Json -Depth 20), [System.Text.UTF8Encoding]::new($false))
     Write-Host 'Preserved existing configuration; telemetry remains disabled.'
 }
 
