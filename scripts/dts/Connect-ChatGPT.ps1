@@ -11,7 +11,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][ValidatePattern('^tunnel_[A-Za-z0-9_-]+$')][string]$TunnelId,
-    [string]$ServerDirectory = (Join-Path $env:LOCALAPPDATA 'DesktopTerminalSync')
+    [string]$ServerDirectory = (Join-Path $env:LOCALAPPDATA 'DesktopTerminalSync'),
+    [switch]$UseClipboardKey
 )
 $ErrorActionPreference='Stop'
 $server = Join-Path $ServerDirectory 'dist\index.js'
@@ -32,14 +33,31 @@ if (-not $tunnelExe) {
 }
 Write-Host 'Using private OpenAI Secure MCP Tunnel. No public inbound port is opened.' -ForegroundColor Cyan
 Write-Host 'Your API key will not be written to disk by this script.'
-$sec = Read-Host 'OpenAI tunnel runtime API key' -AsSecureString
-if ($sec.Length -eq 0) { throw 'No API key was provided. Try pasting again, then press Enter.' }
-$bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($sec)
-try {
-    $env:CONTROL_PLANE_API_KEY = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr)
-} finally {
-    [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr)
-    $sec.Dispose()
+# Windows PowerShell 5.1's secure console paste may insert incomplete text.
+# -UseClipboardKey reads a freshly copied key without putting it in command history.
+# Never print the key; clear the clipboard after transferring it to this process.
+if ($UseClipboardKey) {
+    $key = (Get-Clipboard -Raw)
+    if ($null -eq $key) { $key = '' }
+    $key = $key.Trim()
+    $hasPrefix = $key.StartsWith('sk-', [StringComparison]::Ordinal)
+    if (-not $hasPrefix -or $key.Length -lt 20 -or $key.Contains([char]10) -or $key.Contains([char]13)) {
+        Remove-Variable key -ErrorAction SilentlyContinue
+        throw 'Clipboard does not contain a complete OpenAI runtime API key (expected sk-...); copy the runtime key again from OpenAI Platform > Organization > API Keys.'
+    }
+    $env:CONTROL_PLANE_API_KEY = $key
+    Remove-Variable key -ErrorAction SilentlyContinue
+    Set-Clipboard -Value '' # Avoid leaving the key exposed in clipboard history.
+} else {
+    $sec = Read-Host 'OpenAI tunnel runtime API key' -AsSecureString
+    if ($sec.Length -lt 20) { throw 'Pasted key appears incomplete. Re-run with -UseClipboardKey after copying the complete runtime key.' }
+    $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($sec)
+    try {
+        $env:CONTROL_PLANE_API_KEY = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr)
+    } finally {
+        [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr)
+        $sec.Dispose()
+    }
 }
 $env:DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY='1'
 $profile = 'desktop-terminal-sync'
