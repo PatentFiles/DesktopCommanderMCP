@@ -16,16 +16,24 @@ param(
 $ErrorActionPreference='Stop'
 $server = Join-Path $ServerDirectory 'dist\index.js'
 if (-not (Test-Path -LiteralPath $server)) { throw 'Install and build Desktop Terminal Sync first.' }
+# Prefer PATH; also support the bundled Windows ZIP installation without a permanent PATH edit.
 $tunnel = Get-Command tunnel-client -ErrorAction SilentlyContinue
-if (-not $tunnel) {
-    Write-Host 'Download tunnel-client for Windows from your OpenAI Platform organization Tunnels page:' -ForegroundColor Yellow
-    Write-Host 'https://platform.openai.com/settings/organization/tunnels'
-    Write-Host 'Put tunnel-client.exe on your PATH, reopen PowerShell, then rerun.'
-    throw 'tunnel-client not found'
+$tunnelExe = if ($tunnel) { $tunnel.Source } else { $null }
+if (-not $tunnelExe) {
+    $binDir = Join-Path $ServerDirectory 'TunnelClient'
+    if (Test-Path -LiteralPath $binDir) {
+        $found = Get-ChildItem -LiteralPath $binDir -Filter 'tunnel-client.exe' -Recurse -File |
+            Select-Object -First 1
+        if ($found) { $tunnelExe = $found.FullName }
+    }
+}
+if (-not $tunnelExe) {
+    throw "tunnel-client.exe was not found in PATH or $ServerDirectory\TunnelClient. Install the Windows release first."
 }
 Write-Host 'Using private OpenAI Secure MCP Tunnel. No public inbound port is opened.' -ForegroundColor Cyan
 Write-Host 'Your API key will not be written to disk by this script.'
 $sec = Read-Host 'OpenAI tunnel runtime API key' -AsSecureString
+if ($sec.Length -eq 0) { throw 'No API key was provided. Try pasting again, then press Enter.' }
 $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($sec)
 try {
     $env:CONTROL_PLANE_API_KEY = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr)
@@ -35,15 +43,15 @@ try {
 }
 $env:DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY='1'
 $profile = 'desktop-terminal-sync'
-$cmd = "node `"$server`" --no-onboarding"
+$serverForMcp = ([System.IO.Path]::GetFullPath($server)).Replace([char]92, [char]47)
+$cmd = "node `"$serverForMcp`" --no-onboarding"
 try {
-    & tunnel-client help quickstart
-    & tunnel-client init --sample sample_mcp_stdio_local --profile $profile --tunnel-id $TunnelId --mcp-command $cmd
+    & $tunnelExe init --sample sample_mcp_stdio_local --profile $profile --tunnel-id $TunnelId --mcp-command $cmd
     if ($LASTEXITCODE -ne 0) { throw 'Tunnel profile creation failed. Check CLI help and permissions.' }
-    & tunnel-client doctor --profile $profile --explain
+    & $tunnelExe doctor --profile $profile --explain
     if ($LASTEXITCODE -ne 0) { throw 'Tunnel diagnostics failed.' }
     Write-Host 'Tunnel health checked. Leave this terminal running and add a custom MCP plugin in ChatGPT (Connection: Tunnel).' -ForegroundColor Green
-    & tunnel-client run --profile $profile
+    & $tunnelExe run --profile $profile
 } finally {
     Remove-Item Env:\CONTROL_PLANE_API_KEY -ErrorAction SilentlyContinue
     Remove-Item Env:\DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY -ErrorAction SilentlyContinue
