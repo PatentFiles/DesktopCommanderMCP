@@ -8,7 +8,7 @@
  * the launch failed, about 5 seconds later and in a promise nobody awaited.
  * On Windows Chrome was still running and holding the folder, the delete
  * failed with EBUSY, and src/index.ts exits the server on any unhandled
- * rejection, so one failed write_pdf killed Desktop Commander about 16 seconds
+ * rejection, so one failed write_pdf killed Desktop Terminal Sync about 16 seconds
  * after the tool call had already returned its error.
  *
  * The launch is made to fail with launch_options.timeout = 1: Puppeteer gives
@@ -45,7 +45,7 @@ const USER_DATA_DIR_ARG = '--user-data-dir=';
 /** Node announces every child process it creates on this channel */
 const childProcessCreated = channel('child_process');
 
-// Chrome, Puppeteer and Desktop Commander put their temporary files in this
+// Chrome, Puppeteer and Desktop Terminal Sync put their temporary files in this
 // test's own temp folder, so the test can see exactly what a render leaves behind
 const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'dc-test-pdf-launch-failure-'));
 process.env.TEMP = tempDir;
@@ -61,7 +61,7 @@ process.on('unhandledRejection', (reason) => {
 
 /**
  * Records the profile folders of the Chrome processes started while a render
- * is in progress, from their --user-data-dir argument: Desktop Commander's
+ * is in progress, from their --user-data-dir argument: Desktop Terminal Sync's
  * own, or one Puppeteer created itself. (A Chrome stopped right after a
  * failed launch may not have written anything into its folder yet.)
  */

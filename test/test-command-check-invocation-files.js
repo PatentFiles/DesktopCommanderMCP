@@ -124,7 +124,7 @@ test('POSIX literal backslashes do not turn filenames into shells or builtins', 
   `;
   const child = spawnSync(process.execPath, ['--input-type=module', '-e', script], {
     encoding: 'utf8', timeout: 30000,
-    env: { ...process.env, DESKTOP_COMMANDER_DISABLE_TELEMETRY: '1', WSL_DISTRO_NAME: '' },
+    env: { ...process.env, DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY: '1', WSL_DISTRO_NAME: '' },
   });
   assert.equal(child.status, 0, child.stderr || child.stdout);
   const answers = JSON.parse(child.stdout.trim().split(/\r?\n/).at(-1));

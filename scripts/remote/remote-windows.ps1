@@ -62,9 +62,9 @@
 
         if (-not (Get-Command node.exe -CommandType Application -ErrorAction SilentlyContinue)) {
             # Confirm before downloading or installing anything; Enter chooses Yes, but missing input does not.
-            Write-Host 'Remote Desktop Commander needs Node.js, which could not be found on this computer.'
+            Write-Host 'Desktop Terminal Sync Remote needs Node.js, which could not be found on this computer.'
             Write-Host
-            Write-Host 'If you choose Yes, we will install Node.js 24, then download and start Remote Desktop Commander.'
+            Write-Host 'If you choose Yes, we will install Node.js 24, then download and start Desktop Terminal Sync Remote.'
             Write-Host
             try {
                 $installConsent = Read-Host 'Would you like to continue? Type Yes or No (press Enter for Yes)'
@@ -190,8 +190,8 @@
             throw "Your Node.js installation is incomplete. Please reinstall Node.js from $manualDownloadUrl, then run this command again."
         }
 
-        # Start Desktop Commander in this shell, without elevating the device command.
-        Write-Host 'Starting Remote Desktop Commander. To stop it, press Ctrl+C. To start it again, run this command again.'
+        # Start Desktop Terminal Sync in this shell, without elevating the device command.
+        Write-Host 'Starting Desktop Terminal Sync Remote. To stop it, press Ctrl+C. To start it again, run this command again.'
         & npx.cmd --yes '@wonderwhy-er/desktop-commander@latest' remote
         # Node signal exits use 128 + signal number: SIGINT (2) gives 130; https://nodejs.org/api/process.html#exit-codes
         # Windows Ctrl+C is STATUS_CONTROL_C_EXIT (0xC000013A); https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55
@@ -199,7 +199,7 @@
             return
         }
         if ($LASTEXITCODE -ne 0) {
-            throw 'Remote Desktop Commander stopped unexpectedly. Please run this command again.'
+            throw 'Desktop Terminal Sync Remote stopped unexpectedly. Please run this command again.'
         }
     }
     finally {

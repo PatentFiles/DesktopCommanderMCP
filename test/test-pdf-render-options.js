@@ -14,7 +14,7 @@
  * not exercise those.
  *
  * Each render is watched from outside so a case can prove Chrome ran on
- * Desktop Commander's own profile and that nothing is left running afterwards.
+ * Desktop Terminal Sync's own profile and that nothing is left running afterwards.
  *
  * Cases (each fails on code that honours the option):
  *   - front matter `dest` outside the allowed directories: no file there, the
@@ -24,17 +24,17 @@
  *   - front matter `devtools: true`: returns promptly, nothing left running
  *   - `launch_options.executablePath` (a path that would fail to launch) and
  *     `launch_options.args` (a rival --user-data-dir): render still succeeds on
- *     Desktop Commander's own Chrome and profile; the answer is the same as
+ *     Desktop Terminal Sync's own Chrome and profile; the answer is the same as
  *     before, and the result's internal structuredContent names dest,
  *     pdf_options.path, launch_options.executablePath, launch_options.args and devtools
  *   - front matter launch options that change the browser process (env, dumpio,
  *     pipe, debuggingPort, ignoreDefaultArgs, enableExtensions,
- *     downloadBehavior, handleSIGINT): Chrome starts with Desktop Commander's
+ *     downloadBehavior, handleSIGINT): Chrome starts with Desktop Terminal Sync's
  *     environment (on Windows, with its profile-folder fix), its output is not
  *     piped to stdout (the MCP connection), and with Puppeteer's usual
  *     arguments; each is named as ignored, while launch_options.timeout applies
  *   - an image given by its absolute path (the served folder is a drive root,
- *     as when Desktop Commander runs from "/"): still served to the page
+ *     as when Desktop Terminal Sync runs from "/"): still served to the page
  */
 
 import assert from 'assert';
@@ -77,7 +77,7 @@ const SECRET = 'only the render may read this';
 const IMAGE_FILE = 'dot.png';
 const ONE_PIXEL_PNG = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
 
-// Chrome, Puppeteer and Desktop Commander put their temporary files in this
+// Chrome, Puppeteer and Desktop Terminal Sync put their temporary files in this
 // test's own temp folder. Only `allowed` is an allowed directory.
 const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'dc-test-pdf-render-options-'));
 process.env.TEMP = tempDir;
@@ -294,12 +294,12 @@ async function testIgnoredOptionsReportedInResult() {
     assert.ok(!response.isError, `write_pdf should succeed even though options were ignored: ${JSON.stringify(response.content)}`);
     assert.ok(fs.statSync(outFile).size > 0, 'the PDF should be written to the requested path');
 
-    // executablePath ignored: the render succeeded on Desktop Commander's Chrome, not the bogus path
-    assert.ok(result.chromes.length > 0, 'Desktop Commander should have launched its own Chrome');
-    // args ignored: Chrome ran on Desktop Commander's own profile only, never the rival one
+    // executablePath ignored: the render succeeded on Desktop Terminal Sync's Chrome, not the bogus path
+    assert.ok(result.chromes.length > 0, 'Desktop Terminal Sync should have launched its own Chrome');
+    // args ignored: Chrome ran on Desktop Terminal Sync's own profile only, never the rival one
     const profiles = result.chromes.flatMap(userDataDirsOf);
     assert.ok(profiles.length > 0 && profiles.every((dir) => path.basename(dir).startsWith(DC_PROFILE_PREFIX)),
-        `Chrome should run on Desktop Commander's profile only, saw: ${profiles.join(', ')}`);
+        `Chrome should run on Desktop Terminal Sync's profile only, saw: ${profiles.join(', ')}`);
     assert.strictEqual(profiles.includes(rivalProfile), false, 'launch_options.args added a rival --user-data-dir');
 
     // Nothing was written outside the allowed directory
@@ -365,7 +365,7 @@ async function renderWithLaunchOptions(label, launchOptions) {
     const markdown = ['---', 'launch_options:', ...launchOptions.map((line) => `  ${line}`), '---', `# ${label}`].join('\n');
     const result = await launchesDuring(() => watched(label, () => handleWritePdf({ path: outFile, content: markdown })));
     // What Chrome was started with is checked by the caller first, whether or not the render then succeeded
-    assert.ok(result.launches.length > 0, `${label}: Desktop Commander should have launched Chrome${result.error ? ` (${result.error.message})` : ''}`);
+    assert.ok(result.launches.length > 0, `${label}: Desktop Terminal Sync should have launched Chrome${result.error ? ` (${result.error.message})` : ''}`);
     return { ...result, outFile };
 }
 
@@ -397,12 +397,12 @@ async function testProcessLaunchOptionsIgnored() {
         'handleSIGINT: false',
         `timeout: ${LAUNCH_TIMEOUT_MS}`,
     ]);
-    assert.deepStrictEqual(result.pipedInto, [], "Chrome's output was piped into Desktop Commander's stdout (the MCP connection) and stderr (launch_options.dumpio)");
+    assert.deepStrictEqual(result.pipedInto, [], "Chrome's output was piped into Desktop Terminal Sync's stdout (the MCP connection) and stderr (launch_options.dumpio)");
     for (const { args, env } of result.launches) {
         assert.strictEqual(env.DC_LAUNCH_PROBE, undefined,
             `Chrome was started with the front matter's environment (launch_options.env): ${JSON.stringify(Object.keys(env))}`);
         if (process.platform === 'win32') {
-            assert.strictEqual(env.USERPROFILE, os.userInfo().homedir, "Chrome should start with the account's profile folder (Desktop Commander's Windows fix)");
+            assert.strictEqual(env.USERPROFILE, os.userInfo().homedir, "Chrome should start with the account's profile folder (Desktop Terminal Sync's Windows fix)");
         }
         assert.ok(!args.includes(`--remote-debugging-port=${port}`), "launch_options.debuggingPort put Chrome's DevTools on a port of the markdown's choosing");
         assert.ok(args.includes('--hide-scrollbars'), "launch_options.ignoreDefaultArgs removed one of Puppeteer's Chrome arguments");
@@ -414,17 +414,17 @@ async function testProcessLaunchOptionsIgnored() {
 
     const piped = await renderWithLaunchOptions('launch pipe', ['pipe: true', `timeout: ${LAUNCH_TIMEOUT_MS}`]);
     for (const { args } of piped.launches) {
-        assert.ok(!args.includes('--remote-debugging-pipe'), 'launch_options.pipe changed how Desktop Commander connects to Chrome');
+        assert.ok(!args.includes('--remote-debugging-pipe'), 'launch_options.pipe changed how Desktop Terminal Sync connects to Chrome');
     }
     await assertRenderedIgnoring(piped, 'launch pipe', ['pipe']);
-    console.log("✓ process launch options ignored: Chrome started with Desktop Commander's environment, arguments and output, all named internally");
+    console.log("✓ process launch options ignored: Chrome started with Desktop Terminal Sync's environment, arguments and output, all named internally");
 }
 
 async function testImageByAbsolutePath() {
     const outFile = path.join(allowedDir, 'absolute-image.pdf');
     const root = path.parse(servedDir).root;
     const imageUrl = '/' + path.relative(root, path.join(servedDir, IMAGE_FILE)).split(path.sep).map(encodeURIComponent).join('/');
-    // Desktop Commander serves its working folder: "/" when a client starts it there
+    // Desktop Terminal Sync serves its working folder: "/" when a client starts it there
     process.chdir(root);
     let result;
     try {

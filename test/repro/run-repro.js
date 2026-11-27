@@ -1,6 +1,6 @@
 /**
  * Runs the repro scripts in this folder, each in its own process with an
- * isolated temporary home (so none can touch the real Desktop Commander
+ * isolated temporary home (so none can touch the real Desktop Terminal Sync
  * config), and reports each script's exit code.
  *
  * Usage:

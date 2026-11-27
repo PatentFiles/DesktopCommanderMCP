@@ -1,7 +1,7 @@
 import type { ServerResult } from '../types.js';
 
 /**
- * Tools whose structuredContent is for Desktop Commander's own code and tests
+ * Tools whose structuredContent is for Desktop Terminal Sync's own code and tests
  * only: fixes added it next to the text, and a client must keep receiving what
  * it received before (no new information in tool results). It is dropped here,
  * before the result is recorded in the tool-call history or sent. Tools that

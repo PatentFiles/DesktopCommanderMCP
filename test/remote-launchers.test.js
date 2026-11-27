@@ -205,8 +205,8 @@ esac`,
                 const declined = run({ TEST_ARCH: architecture }, "/bin/sh", readFileSync(script, "utf8"));
                 expect(declined, 0);
                 assert.ok(declined.stdout.startsWith(
-                    "\nRemote Desktop Commander needs Node.js, which could not be found on this computer.\n\n" +
-                    "If you choose Yes, we will install Node.js 24, then download and start Remote Desktop Commander.\n\n" +
+                    "\nDesktop Terminal Sync Remote needs Node.js, which could not be found on this computer.\n\n" +
+                    "If you choose Yes, we will install Node.js 24, then download and start Desktop Terminal Sync Remote.\n\n" +
                     "Would you like to continue? Type Yes or No (press Enter for Yes): "
                 ), "Leave a blank line between each explanation and before the question");
                 const lines = declined.stdout.split("\n");
@@ -229,7 +229,7 @@ esac`,
                 assert.equal(existsSync(env.TEST_ELEVATIONS), false, "Declining must not request administrator access");
                 assert.equal(existsSync(env.TEST_TEMP_CREATIONS), false, "Declining must not create a temporary directory");
                 assert.equal(existsSync(installed), false, "Declining must not install Node");
-                assert.equal(readFileSync(env.TEST_CALLS, "utf8"), callsBeforeConsent, "Declining must not start Desktop Commander");
+                assert.equal(readFileSync(env.TEST_CALLS, "utf8"), callsBeforeConsent, "Declining must not start Desktop Terminal Sync");
             }
         }
         rmSync(terminalInput);
@@ -285,7 +285,7 @@ esac`,
             expect(emptyInstall, 1);
             assert.match(emptyInstall.stderr, /We could not finish installing Node\.js/);
             assert.ok(emptyInstall.stderr.includes(manualDownloads[archEnv.TEST_ARCH]));
-            assert.equal(readFileSync(env.TEST_CALLS, "utf8"), callsBeforeInstall, "Failed installs must not launch Desktop Commander");
+            assert.equal(readFileSync(env.TEST_CALLS, "utf8"), callsBeforeInstall, "Failed installs must not launch Desktop Terminal Sync");
             mkdirSync(installed);
             writeFileSync(path.join(installed, "unrelated-file"), "keep existing system files");
             chmodSync(path.join(installed, "unrelated-file"), 0o600);

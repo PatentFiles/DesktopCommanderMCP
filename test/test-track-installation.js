@@ -2,7 +2,7 @@
  * The postinstall tracking (track-installation.js): it tells where the package
  * was installed from (Smithery, npx, npm install, Codespaces, VS Code, Gitpod, CI,
  * Docker, or unknown) from npm's variables, the environment and the parent
- * process, and posts one event with Desktop Commander's client id, to the proxy
+ * process, and posts one event with Desktop Terminal Sync's client id, to the proxy
  * or else its fallback; nothing in it fails the install. Through
  * helpers/install-script.js: stand-ins answer the post and the `ps` it runs.
  */
@@ -81,7 +81,7 @@ async function posts() {
   assertTelemetryRequests(run.posts);
   assert.deepStrictEqual(run.posts.map((post) => post.post), [PROXY], 'one post, to the proxy');
   const body = JSON.parse(run.posts[0].body);
-  assert.strictEqual(body.client_id, 'mine', 'Desktop Commander\'s client id');
+  assert.strictEqual(body.client_id, 'mine', 'Desktop Terminal Sync\'s client id');
   assert.strictEqual(body.events[0].name, 'package_installed');
   for (const config of [{ telemetryEnabled: true }, '{ not json', undefined]) {
     const other = await track({ prepare: config === undefined ? undefined : ownConfig(config) });
@@ -94,7 +94,7 @@ async function posts() {
     assertTelemetryRequests(refused.posts);
     assert.strictEqual(refused.posts[1].post, FALLBACK, `${answer}: the configured fallback`);
   }
-  console.log('✓ one post with Desktop Commander\'s client id, or a new one; the fallback when the proxy refuses');
+  console.log('✓ one post with Desktop Terminal Sync\'s client id, or a new one; the fallback when the proxy refuses');
 }
 
 /** Checks both Docker branches use unknown for absent or empty hostnames while keeping Docker as the source. */
@@ -124,11 +124,11 @@ async function debugOutput() {
   for (const env of debugging) {
     const run = await track({ env, prepare: ownConfig('{ not json'), commands: { 'ps -p': { error: 'no ps' } } });
     const says = (text) => run.stdout.includes(text);
-    assert.ok(says('[Desktop Commander] Installation tracked'), `${JSON.stringify(env)}:\n${run.stdout}`);
+    assert.ok(says('[Desktop Terminal Sync] Installation tracked'), `${JSON.stringify(env)}:\n${run.stdout}`);
     assert.ok(says('Could not get parent process info') && says('Error reading config file'), run.stdout);
   }
   const quiet = await track();
-  assert.ok(!quiet.stdout.includes('[Desktop Commander'), 'quiet without DEBUG');
+  assert.ok(!quiet.stdout.includes('[Desktop Terminal Sync'), 'quiet without DEBUG');
   console.log('✓ DEBUG, NODE_ENV=development or DC_DEBUG: it says what it found; otherwise quiet');
 }
 

@@ -4,11 +4,11 @@
  * Regression test: a PDF render releases everything it opens, on every path,
  * and its local web server serves nobody but the render's own Chrome.
  *
- * md-to-pdf serves the markdown's base folder (Desktop Commander's working
+ * md-to-pdf serves the markdown's base folder (Desktop Terminal Sync's working
  * folder) over HTTP while Chrome renders, so relative and absolute image paths
  * load. mdToPdf() started that server and then Chrome, and stopped them only
  * after a successful render: after a failed Chrome launch the server kept
- * listening until Desktop Commander restarted, and after a conversion that
+ * listening until Desktop Terminal Sync restarted, and after a conversion that
  * failed once Chrome was running, Chrome kept running too. The server listened
  * on every network interface and answered anyone who asked.
  *
@@ -26,8 +26,8 @@
  *   - a Chrome launch that fails (launch_options.timeout = 1): the same when writePdf rejects
  *   - a conversion that fails after Chrome launched (a stylesheet that does not exist): the same
  *   - launch_options.args carrying a rival --user-data-dir: it is ignored, so
- *     Chrome still runs on Desktop Commander's own profile and nothing is left
- *     behind (Desktop Commander always launches Chrome on its own profile via
+ *     Chrome still runs on Desktop Terminal Sync's own profile and nothing is left
+ *     behind (Desktop Terminal Sync always launches Chrome on its own profile via
  *     args, so a caller cannot move it off, which is what closed #22/#31)
  */
 
@@ -75,7 +75,7 @@ const SECRET = 'only the render may read this';
 const IMAGE_FILE = 'dot.png';
 const ONE_PIXEL_PNG = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
 
-// Chrome, Puppeteer and Desktop Commander put their temporary files in this
+// Chrome, Puppeteer and Desktop Terminal Sync put their temporary files in this
 // test's own temp folder; md-to-pdf serves the working folder
 const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'dc-test-pdf-render-resources-'));
 process.env.TEMP = tempDir;
@@ -291,7 +291,7 @@ async function testCallerArgsCannotChangeProfile() {
     const outFile = path.join(tempDir, 'caller-args.pdf');
     const rivalProfile = path.join(tempDir, 'rival-profile');
     // launch_options.args is ignored, so a caller cannot point Chrome at its own
-    // profile; the render succeeds on Desktop Commander's own profile (headless,
+    // profile; the render succeeds on Desktop Terminal Sync's own profile (headless,
     // the default: no window on the desktop running the test)
     const result = await render(outFile, '# Rendered', { launch_options: { args: [`--user-data-dir=${rivalProfile}`] } });
     if (result.error) throw result.error;
@@ -299,11 +299,11 @@ async function testCallerArgsCannotChangeProfile() {
 
     const profiles = result.chromes.map(userDataDirOf);
     assert.ok(profiles.length > 0 && profiles.every((dir) => dir && path.basename(dir).startsWith(DC_PROFILE_PREFIX)),
-        `Chrome should run on Desktop Commander's profile folder, not the caller's (${PUPPETEER_PROFILE_MARKER}* or the rival): ${profiles.join(', ')}`);
+        `Chrome should run on Desktop Terminal Sync's profile folder, not the caller's (${PUPPETEER_PROFILE_MARKER}* or the rival): ${profiles.join(', ')}`);
     assert.strictEqual(profiles.includes(rivalProfile), false, 'launch_options.args set a rival --user-data-dir');
 
     const waited = await assertNothingLeft(result, 'launch_options.args ignored');
-    console.log(`✓ launch_options.args ignored: Chrome ran on Desktop Commander's profile, nothing left, profile removed after ${waited}ms`);
+    console.log(`✓ launch_options.args ignored: Chrome ran on Desktop Terminal Sync's profile, nothing left, profile removed after ${waited}ms`);
 }
 
 async function main() {

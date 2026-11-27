@@ -1,5 +1,5 @@
 /**
- * Desktop Commander's Docker image for the tests in test/docker/: builds it
+ * Desktop Terminal Sync's Docker image for the tests in test/docker/: builds it
  * from this checkout and checks write_pdf in a container of it, started the
  * way the Docker install starts it (`docker run -i --rm`, with Docker's
  * default security and no extra flags).
@@ -62,7 +62,7 @@ export async function checkWritePdf(image, containerName, dockerArgs = []) {
       // from a dead local address, as every test's server gets them (test/helpers/test-env.js)
       args: [
         'run', '-i', '--rm', '--name', containerName, ...dockerArgs,
-        '--env', 'DESKTOP_COMMANDER_DISABLE_TELEMETRY=1',
+        '--env', 'DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY=1',
         '--env', 'DC_FLAG_URL=http://127.0.0.1:9/',
         image,
       ],

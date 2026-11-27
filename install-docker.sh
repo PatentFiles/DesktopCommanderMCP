@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Desktop Commander Docker Installation Script
+# Desktop Terminal Sync Docker Installation Script
 
 set -e
 
@@ -131,7 +131,7 @@ pull_docker_image() {
 ask_for_folders() {
     echo
     echo -e "${BLUE}📁 Folder Access Setup${NC}"
-    print_info "By default, Desktop Commander will have access to your user folder:"
+    print_info "By default, Desktop Terminal Sync will have access to your user folder:"
     print_info "📂 $HOME"
     echo
     echo -n "Press Enter to accept user folder access or 'y' to customize: "
@@ -184,13 +184,13 @@ ask_for_folders() {
 
         if [ ${#FOLDERS[@]} -eq 0 ]; then
             echo
-            print_warning "⚠️  No folders selected - Desktop Commander will have NO file access"
+            print_warning "⚠️  No folders selected - Desktop Terminal Sync will have NO file access"
             echo
             print_info "This means:"
-            echo "  • Desktop Commander cannot read or write any files on your computer"
+            echo "  • Desktop Terminal Sync cannot read or write any files on your computer"
             echo "  • It cannot help with coding projects, file management, or document editing"
             echo "  • It will only work for system commands and package installation"
-            echo "  • This makes Desktop Commander much less useful than intended"
+            echo "  • This makes Desktop Terminal Sync much less useful than intended"
             echo
             print_info "You probably want to share at least some folder to work with files"
             print_info "Most users share their home directory: $HOME"
@@ -202,7 +202,7 @@ ask_for_folders() {
                 ask_for_folders
                 return
             fi
-            print_warning "Proceeding with no file access - Desktop Commander will be limited"
+            print_warning "Proceeding with no file access - Desktop Terminal Sync will be limited"
         fi
     else
         # Default: use home directory
@@ -241,10 +241,10 @@ stop_before_volume_update() {
 }
 
 # Bring the pulled image into the dc-system volume. The volume keeps /usr, so
-# without this a new image's Desktop Commander and its Chromium stay hidden
+# without this a new image's Desktop Terminal Sync and its Chromium stay hidden
 # behind the ones from the image the volume was first made with.
 update_system_volume() {
-    print_info "Updating Desktop Commander in your persistent volume dc-system..."
+    print_info "Updating Desktop Terminal Sync in your persistent volume dc-system..."
 
     # Nothing may use the volume while it is copied: stop the containers that have it (found by
     # the volume, not ancestor=, which after the pull no longer matches the older image's containers),
@@ -260,16 +260,16 @@ update_system_volume() {
             stop_before_volume_update "Docker didn't answer which containers use the volume dc-system"
         [ -z "$containers" ] || {
             print_warning "Docker stop exited $stop_status; stderr (first 512 characters): $stop_error"
-            stop_before_volume_update "Desktop Commander's container is still running and uses the volume dc-system"
+            stop_before_volume_update "Desktop Terminal Sync's container is still running and uses the volume dc-system"
         }
     fi
 
     # Copies the new image's /usr into the volume, mounted at /target, so an update reaches users
-    # whose /usr is kept in that volume. Desktop Commander's own folder is replaced; the rest is
+    # whose /usr is kept in that volume. Desktop Terminal Sync's own folder is replaced; the rest is
     # copied over what the volume has, so the tools the AI installed stay. install-docker.ps1 has
     # the same command.
     if docker run --rm -v dc-system:/target "$DOCKER_IMAGE" sh -c 'rm -rf /target/src/app && cp -a /usr/. /target/'; then
-        print_success "Desktop Commander updated; the tools you installed are kept"
+        print_success "Desktop Terminal Sync updated; the tools you installed are kept"
     else
         print_error "Could not copy the new image into the volume dc-system"
         print_info "A folder in the volume may be a link in the new image, or the other way round."
@@ -378,7 +378,7 @@ print('Successfully updated Claude config')
     }
 
     print_verbose "Updated Claude config: $CLAUDE_CONFIG"
-    print_verbose "Desktop Commander will be available as 'desktop-commander' in Claude"
+    print_verbose "Desktop Terminal Sync will be available as 'desktop-commander' in Claude"
 }
 
 # Test the persistent setup
@@ -407,10 +407,10 @@ test_persistence() {
 # Show container management commands
 show_management_info() {
     echo
-    print_success "🎉 Installation successfully completed! Thank you for using Desktop Commander!"
+    print_success "🎉 Installation successfully completed! Thank you for using Desktop Terminal Sync!"
     echo
     print_info "How it works:"
-    echo "• Desktop Commander runs in isolated containers"
+    echo "• Desktop Terminal Sync runs in isolated containers"
     echo "• Your development tools and configs persist between uses"
     echo "• Each command creates a fresh, clean container"
     echo
@@ -442,7 +442,7 @@ reset_persistence() {
             print_info "Cleaning up containers and volumes..."
             
             # Stop and remove any containers that might be using our volumes
-            print_verbose "Stopping any running Desktop Commander containers..."
+            print_verbose "Stopping any running Desktop Terminal Sync containers..."
             docker ps -q --filter "ancestor=$DOCKER_IMAGE" | xargs -r docker stop >/dev/null 2>&1 || true
             docker ps -a -q --filter "ancestor=$DOCKER_IMAGE" | xargs -r docker rm >/dev/null 2>&1 || true
             
@@ -661,7 +661,7 @@ restart_claude
 
 echo
 print_success "✅ Claude has been restarted (if possible)"
-print_info "Desktop Commander is available as 'desktop-commander' in Claude"
+print_info "Desktop Terminal Sync is available as 'desktop-commander' in Claude"
 echo
 print_info "Next steps: Install anything you want - it will persist!"
 echo "• Global packages: npm install -g typescript"

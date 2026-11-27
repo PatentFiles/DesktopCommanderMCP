@@ -402,7 +402,7 @@ async function writeFiles(dir) {
   for (const name of ['a.txt', 'b.txt', 'c.txt']) write(path.join('max', name), 'needle\n');
   write(path.join('five', 'five.txt'), [1, 2, 3, 4, 5].map((n) => `needle ${n}`).join('\n') + '\n');
   write(path.join('context', 'context.txt'), 'before\nneedle\nafter\n');
-  // Office files, written by Desktop Commander's own Excel and DOCX handlers
+  // Office files, written by Desktop Terminal Sync's own Excel and DOCX handlers
   for (const folder of ['office', 'walk', 'glob']) fs.mkdirSync(path.join(dir, folder), { recursive: true });
   await writeFile(path.join(dir, 'office', 'good.xlsx'), JSON.stringify([['needle']]));
   write(path.join('office', 'broken.xlsx'), 'this is not a workbook\n');

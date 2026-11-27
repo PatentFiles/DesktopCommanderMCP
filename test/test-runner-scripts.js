@@ -141,7 +141,7 @@ export default async function run() {
     fs.writeFileSync(path.join(dir, 'home-probe.mjs'), [
       "import { fork } from 'child_process';",
       "const own = { home: process.env.HOME, profile: process.env.USERPROFILE, set: process.env.DC_TEST_HOME_SET,",
-      "  skips: process.env.DC_TEST_SKIP_FILE, telemetry: process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY, color: process.env.FORCE_COLOR,",
+      "  skips: process.env.DC_TEST_SKIP_FILE, telemetry: process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY, color: process.env.FORCE_COLOR,",
       "  xdgConfig: process.env.XDG_CONFIG_HOME };",
       "if (process.argv[2] === 'child') { console.log(JSON.stringify(own)); process.exit(0); }",
       "const child = fork(process.argv[1], ['child'], { stdio: ['ignore', 'pipe', 'inherit', 'ipc'] });",
@@ -152,7 +152,7 @@ export default async function run() {
     // This file's own test home, under the runner: the probe's must be another
     const ownHome = process.env.HOME ?? process.env.USERPROFILE;
     // Without the telemetry setting this process has, so only the hook can turn telemetry off
-    const { DESKTOP_COMMANDER_DISABLE_TELEMETRY, ...withoutTelemetry } = cleanEnv();
+    const { DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY, ...withoutTelemetry } = cleanEnv();
     const probe = spawnSync(process.execPath, ['--import', hook, path.join(dir, 'home-probe.mjs')],
       { cwd: dir, env: { ...withoutTelemetry, DC_TEST_RUN_DIR: runDir, FORCE_COLOR: '1', XDG_CONFIG_HOME: path.join(dir, 'real-config') }, encoding: 'utf8', timeout: 60_000 });
     assert.strictEqual(probe.status, 0, `${probe.stdout}${probe.stderr}`);

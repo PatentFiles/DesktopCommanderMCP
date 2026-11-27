@@ -4,7 +4,7 @@
  * last lines, or fail half way.
  *
  * The user's symptom (#476, #631, #701): after read_file read part of a text
- * file, the file stayed open until Desktop Commander exited. On Windows,
+ * file, the file stayed open until Desktop Terminal Sync exited. On Windows,
  * another program then couldn't rename a new file over it (EPERM, "Access
  * denied"), as editors and build tools do when they save. The line reader
  * stopped at the line limit and closed itself, but not the file stream under it.

@@ -66,7 +66,7 @@ async function main() {
   console.log('===== read_file Unknown-Parameter Behavior Integration Test =====');
   // Telemetry off also when this file runs directly, without the runner's environment
   const client = await connectToServer('desktop-commander-unknown-params-test',
-    { ...process.env, DESKTOP_COMMANDER_DISABLE_TELEMETRY: 'true' });
+    { ...process.env, DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY: 'true' });
   const originalConfig = await setup(client);
 
   try {

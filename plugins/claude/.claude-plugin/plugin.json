@@ -1,10 +1,10 @@
 {
   "name": "desktop-commander",
-  "displayName": "Desktop Commander",
+  "displayName": "Desktop Terminal Sync",
   "version": "0.2.0",
   "description": "MCP server for terminal commands, process management, and file operations across text files, code, PDF, DOCX, Excel, images, and structured data",
   "author": {
-    "name": "Desktop Commander",
+    "name": "Desktop Terminal Sync",
     "email": "es@desktopcommander.app"
   },
   "homepage": "https://desktopcommander.app",

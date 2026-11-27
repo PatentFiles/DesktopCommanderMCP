@@ -1,6 +1,6 @@
 /**
  * Helpers for tests that check processes against the OS rather than against
- * Desktop Commander's own bookkeeping: start a process tree
+ * Desktop Terminal Sync's own bookkeeping: start a process tree
  * (fixtures/process-tree.js) whose processes report their PIDs, check which
  * PIDs still run, make the tool that finds a tree impossible to start, and kill
  * what a failing test left behind.

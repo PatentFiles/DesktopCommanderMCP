@@ -25,7 +25,7 @@ const CLEAN = Object.fromEntries([
 ].map((name) => [name, null]));
 const PROXY = 'https://telemetry.desktopcommander.app/mp/collect';
 const FALLBACK = 'https://dc-telemetry-proxy-83847352264.europe-west1.run.app/mp/collect';
-// Uninstall sends telemetry only when Desktop Commander's config says so
+// Uninstall sends telemetry only when Desktop Terminal Sync's config says so
 const telemetryOn = (home) => {
   const folder = path.join(home, '.claude-server-commander');
   fs.mkdirSync(folder, { recursive: true });

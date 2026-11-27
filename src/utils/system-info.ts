@@ -65,7 +65,7 @@ export interface SystemInfo {
     };
 }
 
-/** True in Desktop Commander's Docker image, whose Dockerfile sets MCP_CLIENT_DOCKER=true */
+/** True in Desktop Terminal Sync's Docker image, whose Dockerfile sets MCP_CLIENT_DOCKER=true */
 export function isDockerImage(): boolean {
     return process.env.MCP_CLIENT_DOCKER === 'true';
 }
@@ -305,7 +305,7 @@ function discoverContainerMounts(isContainer: boolean): DockerMount[] {
         // /mnt directory doesn't exist or not accessible
     }
 
-    // Method 3: Check /home directory for user-mounted folders (Desktop Commander Docker installer pattern)
+    // Method 3: Check /home directory for user-mounted folders (Desktop Terminal Sync Docker installer pattern)
     try {
         if (fs.existsSync('/home')) {
             const contents = fs.readdirSync('/home');
@@ -658,7 +658,7 @@ export function getOSSpecificGuidance(systemInfo: SystemInfo): string {
 
         if (docker.containerType === 'kubernetes') {
             guidance += `
-This Desktop Commander instance is running inside a Kubernetes pod.`;
+This Desktop Terminal Sync instance is running inside a Kubernetes pod.`;
             
             // Add Kubernetes-specific info
             if (docker.containerEnvironment?.kubernetesNamespace) {
@@ -675,7 +675,7 @@ Node: ${docker.containerEnvironment.kubernetesNode}`;
             }
         } else if (docker.containerType === 'docker') {
             guidance += `
-This Desktop Commander instance is running inside a Docker container.`;
+This Desktop Terminal Sync instance is running inside a Docker container.`;
             
             if (docker.orchestrator === 'docker-compose') {
                 guidance += ` (Docker Compose)`;
@@ -684,7 +684,7 @@ This Desktop Commander instance is running inside a Docker container.`;
             }
         } else {
             guidance += `
-This Desktop Commander instance is running inside a ${docker.containerType || 'container'} environment.`;
+This Desktop Terminal Sync instance is running inside a ${docker.containerType || 'container'} environment.`;
         }
 
         if (docker.mountPoints.length > 0) {
@@ -712,14 +712,14 @@ Linux/Mac: "/Users/john/projects/data/file.txt" → "/home/projects/data/file.tx
 
 Typical translation removes the drive letter or user prefix, keeps the full folder structure, and maps it under /home/.
 
-NOTE: Desktop Commander Docker installer mounts host folders to /home/[folder-name].`;
+NOTE: Desktop Terminal Sync Docker installer mounts host folders to /home/[folder-name].`;
         } else {
             guidance += `
 
 ⚠️  WARNING: No mounted directories detected.
 Files created outside mounted volumes will be lost when the container stops.
 Persistent file work requires a mounted directory, available through the Docker installer or a -v mount.
-Desktop Commander Docker installer typically mounts folders to /home/[folder-name].`;
+Desktop Terminal Sync Docker installer typically mounts folders to /home/[folder-name].`;
         }
 
         if (docker.containerEnvironment?.containerName) {

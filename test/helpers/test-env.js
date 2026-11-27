@@ -10,7 +10,7 @@ export const NO_WSL_INTEROP = new URL('../fixtures/no-wsl-interop-preload.mjs', 
 
 /**
  * Environment for one test process. The runners start every test file with it:
- * - a fresh temporary home, so Desktop Commander's config, flag cache and logs
+ * - a fresh temporary home, so Desktop Terminal Sync's config, flag cache and logs
  *   (~/.claude-server-commander) never touch the real ones. It is given by its
  *   real path: macOS's temporary folder is under /var, a link to /private/var,
  *   and a test must not meet that link unless it makes one itself
@@ -34,7 +34,7 @@ export function createTestEnv() {
     ...inherited,
     HOME: home,
     USERPROFILE: home,
-    DESKTOP_COMMANDER_DISABLE_TELEMETRY: process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY ?? '1',
+    DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY: process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY ?? '1',
     DC_FLAG_URL: process.env.DC_FLAG_URL ?? 'http://127.0.0.1:9/',
   };
   if (process.platform === 'linux') env.NODE_OPTIONS = [process.env.NODE_OPTIONS, `--import ${NO_WSL_INTEROP}`].filter(Boolean).join(' ');

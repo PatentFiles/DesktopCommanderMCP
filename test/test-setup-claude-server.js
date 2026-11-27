@@ -1,6 +1,6 @@
 /**
  * The setup script (setup-claude-server.js, `npm run setup` and the `setup` bin):
- * it writes Desktop Commander into Claude's config for each platform, keeps what
+ * it writes Desktop Terminal Sync into Claude's config for each platform, keeps what
  * else the config has, sets the server up for npx or the local checkout, with or
  * without the debugger, restarts Claude, and fails with exit 1 on a config it can't
  * read or write. Through helpers/install-script.js: a temporary home, and stand-ins
@@ -69,7 +69,7 @@ async function eachPlatform() {
   console.log('✓ each platform: its config file, a new config, Claude stopped and started');
 }
 
-/** Checks that replacing Desktop Commander's entry preserves another server and the existing client identity. */
+/** Checks that replacing Desktop Terminal Sync's entry preserves another server and the existing client identity. */
 async function existingConfigs() {
   const servers = { desktopCommander: { command: 'old' }, other: { command: 'x' } };
   const prepare = (home) => {
@@ -84,7 +84,7 @@ async function existingConfigs() {
   assert.ok(sent(run, 'npx_setup_remove_old_config', 'npx_setup_config_file_read'));
   assert.deepStrictEqual(ownConfig(run), { clientId: 'kept' }, 'its own config kept');
   const withVersion = await setup({ platform: 'linux', env: { npm_package_version: '9.9.9' } });
-  assert.ok(withVersion.stdout.includes('Desktop Commander MCP v9.9.9'), 'npm\'s package version, when npm runs it');
+  assert.ok(withVersion.stdout.includes('Desktop Terminal Sync v9.9.9'), 'npm\'s package version, when npm runs it');
   console.log('✓ an existing config: the old entry replaced, the rest kept');
 }
 

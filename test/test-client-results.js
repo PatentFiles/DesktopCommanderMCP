@@ -4,7 +4,7 @@
  * search ended (here: stopped at maxResults), and start_process's refusals,
  * which name the blocked entry or say why the check failed, and its note on a
  * program the check can't see (#870, #873). Facts those fixes added for
- * Desktop Commander's own code and tests (structuredContent) are dropped before
+ * Desktop Terminal Sync's own code and tests (structuredContent) are dropped before
  * the reply (src/utils/internal-facts.ts), so no other new information reaches the client.
  * Runs the real server over stdio, as a client does.
  */
@@ -20,7 +20,7 @@ import { waitUntil } from './helpers/wait.js';
 
 const textOf = (result) => result.content?.find((block) => block.type === 'text')?.text ?? '';
 
-/** write_pdf with an option Desktop Commander ignores: the answer is the plain success line */
+/** write_pdf with an option Desktop Terminal Sync ignores: the answer is the plain success line */
 async function writePdfIgnoringAnOption(client, dir) {
   const target = path.join(dir, 'ignored-option.pdf');
   const result = await callToolOnceLoaded(client, {

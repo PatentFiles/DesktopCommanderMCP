@@ -106,7 +106,7 @@ async function testCallWhileLoadingAnswersAtOnce(server, file) {
     assert(answer,
       `with PDF reading support still loading, read_file of a PDF gave no answer within ${AT_ONCE_MS / 1000} s: ` +
       'it waited for unpdf to load inside the call, and a client gives a call only a few seconds');
-    assert(answer.isError === true && /Can't read held\.pdf yet: Desktop Commander is still loading its PDF reading support/.test(text(answer)),
+    assert(answer.isError === true && /Can't read held\.pdf yet: Desktop Terminal Sync is still loading its PDF reading support/.test(text(answer)),
       `with PDF reading support still loading, read_file of held.pdf should answer at once that it can't read held.pdf yet; it answered: ${text(answer)}`);
     console.log(`✓ A call while PDF reading support is loading answers in ${Date.now() - started} ms: ${text(answer)}`);
   } finally {
@@ -120,7 +120,7 @@ async function testReadMultipleFilesWhileLoading(server, file, second) {
   const answer = text(await server.client.callTool({ name: 'read_multiple_files', arguments: { paths: [file, second] } }));
   for (const name of [path.basename(file), path.basename(second)]) {
     const escaped = name.replace(/\./g, '\\.');
-    assert(new RegExp(`${escaped}: Error - Can't read ${escaped} yet: Desktop Commander is still loading its PDF reading support`).test(answer),
+    assert(new RegExp(`${escaped}: Error - Can't read ${escaped} yet: Desktop Terminal Sync is still loading its PDF reading support`).test(answer),
       `with PDF reading support still loading, read_multiple_files should say for ${name} that it can't read ${name} yet; it answered: ${answer}`);
   }
   console.log('✓ read_multiple_files says for each file, by name, that it can\'t be read yet');
@@ -132,7 +132,7 @@ async function testWritePdfMarkdownStartingWithLink(server, dir) {
   const deadline = Date.now() + LOAD_DEADLINE_MS;
   while (!server.logs().some((line) => /Loading md-to-pdf failed/.test(line)) && Date.now() < deadline) await sleep(100);
   const answer = await server.client.callTool({ name: 'write_pdf', arguments: { path: path.join(dir, 'links.pdf'), content: '[Home](https://example.com)\n\n# Links' } });
-  assert(answer.isError === true && /Can't write links\.pdf: Desktop Commander couldn't load its PDF writing support/.test(text(answer)),
+  assert(answer.isError === true && /Can't write links\.pdf: Desktop Terminal Sync couldn't load its PDF writing support/.test(text(answer)),
     `write_pdf with markdown starting with a link, while PDF writing can't be loaded, should say it can't write links.pdf ` +
     `(markdown, as the tool reads it, not page edits); it answered: ${text(answer)}`);
   console.log(`✓ write_pdf with markdown starting with a link is writing a PDF: ${text(answer)}`);
@@ -151,7 +151,7 @@ async function testFailedLoadIsNotKept(server, file) {
   const deadline = Date.now() + LOAD_DEADLINE_MS;
   while (!server.logs().some((line) => /Loading exceljs failed/.test(line)) && Date.now() < deadline) await sleep(100);
   const answer = await server.client.callTool({ name: 'read_file', arguments: { path: file } });
-  assert(answer.isError === true && /Can't read held\.xlsx: Desktop Commander couldn't load its Excel support \(.*exceljs failed to load \(test\)/.test(text(answer)),
+  assert(answer.isError === true && /Can't read held\.xlsx: Desktop Terminal Sync couldn't load its Excel support \(.*exceljs failed to load \(test\)/.test(text(answer)),
     `when exceljs failed to load, read_file of held.xlsx should say it can't read held.xlsx as Excel support couldn't be loaded, and why; it answered: ${text(answer)}`);
   assert(/ZebraQuartz held/.test(await callTool(server.client, 'read_file', { path: file })),
     'after a failed load, a later read_file of the .xlsx should load Excel support again and show its cells ' +
@@ -165,7 +165,7 @@ async function testFailedRequireTriesAgain(server, file) {
   while (!server.logs().some((line) => /Loading @opendocsg\/pdf2md failed/.test(line)) && Date.now() < deadline) await sleep(100);
   const answer = await server.client.callTool({ name: 'read_file', arguments: { path: file } });
   assert(answer.isError === true &&
-    /Can't read held\.pdf: Desktop Commander couldn't load its PDF reading support \(.*unpdf failed to load \(test\)\)\. It's loading it again/.test(text(answer)),
+    /Can't read held\.pdf: Desktop Terminal Sync couldn't load its PDF reading support \(.*unpdf failed to load \(test\)\)\. It's loading it again/.test(text(answer)),
     "when pdf2md's require() of unpdf failed, read_file of held.pdf should say it is loading PDF reading support again: " +
     `a failed require() can be tried again; it answered: ${text(answer)}`);
   assert((await callTool(server.client, 'read_file', { path: file })).trim().length > 0,
@@ -179,8 +179,8 @@ async function testFailedImportSaysRestart(server, file) {
   while (!server.logs().some((line) => /Loading unpdf failed/.test(line)) && Date.now() < deadline) await sleep(100);
   const answer = await server.client.callTool({ name: 'read_file', arguments: { path: file } });
   assert(answer.isError === true &&
-    /Can't read held\.pdf: Desktop Commander couldn't load its PDF reading support \(.*unpdf failed to load \(test\)\)\. Restart Desktop Commander/.test(text(answer)),
-    'when unpdf failed to load, read_file of held.pdf should say to restart Desktop Commander: Node keeps a failed import() failed, ' +
+    /Can't read held\.pdf: Desktop Terminal Sync couldn't load its PDF reading support \(.*unpdf failed to load \(test\)\)\. Restart Desktop Terminal Sync/.test(text(answer)),
+    'when unpdf failed to load, read_file of held.pdf should say to restart Desktop Terminal Sync: Node keeps a failed import() failed, ' +
     `so trying again can't work; it answered: ${text(answer)}`);
   console.log(`✓ A failed import() says to restart: ${text(answer)}`);
 }

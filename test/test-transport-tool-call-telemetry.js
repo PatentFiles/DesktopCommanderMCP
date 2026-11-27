@@ -64,10 +64,10 @@ async function handle(callId, { toolThrows = false, saveThrows = false, toolResu
 const originalRequest = https.request;
 const originalGetValue = configManager.getValue;
 const originalGetOrCreateClientId = configManager.getOrCreateClientId;
-const originalDisableTelemetry = process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY;
+const originalDisableTelemetry = process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY;
 try {
     mock.timers.enable({ apis: ['Date'], now: Date.now() });
-    process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '0';
+    process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '0';
     configManager.getValue = async key => key === 'telemetryEnabled' ? true : undefined;
     configManager.getOrCreateClientId = async () => 'installation-1';
     https.request = (options, onResponse) => {
@@ -109,6 +109,6 @@ try {
     syncBuiltinESMExports();
     configManager.getValue = originalGetValue;
     configManager.getOrCreateClientId = originalGetOrCreateClientId;
-    process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = originalDisableTelemetry;
+    process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = originalDisableTelemetry;
 }
 console.log('PASS device tool completion reports one execution outcome per call');

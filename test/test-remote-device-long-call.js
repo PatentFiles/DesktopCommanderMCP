@@ -1,6 +1,6 @@
 /**
  * The device (`desktop-commander remote`) runs each Remote tool call on its
- * local Desktop Commander and waits for the answer. A call whose work takes
+ * local Desktop Terminal Sync and waits for the answer. A call whose work takes
  * longer than a minute, such as reading a file from a slow network source,
  * must get its result. With the MCP SDK's default time limit of 60 seconds,
  * the device gave up on such a call with "MCP error -32001: Request timed out",

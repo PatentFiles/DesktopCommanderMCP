@@ -1,8 +1,8 @@
-// Repro (#697): `desktop-commander remote` beside an older Desktop Commander
+// Repro (#697): `desktop-commander remote` beside an older Desktop Terminal Sync
 // fails to start with `-32603 Unexpected end of JSON input`, and floods its
 // log with "Failed to reload config".
 //
-// Desktop Commander 0.2.48 and older write config.json in place: the file is
+// Desktop Terminal Sync 0.2.48 and older write config.json in place: the file is
 // empty from the moment the writer opens it until the content lands. Measured
 // with the real 0.2.46 serving tool calls beside the current build: empty for
 // p50 27 ms, p99 150 ms, max 261 ms per write on Windows (p50 15 ms, max 63 ms

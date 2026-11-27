@@ -130,7 +130,7 @@ Note: large vaults can lag with heavy Dataview queries — prefer Bases there.
 ## Orphan notes & link hygiene
 
 An orphan is a note with no inbound or outbound links. To find and fix:
-1. **From Desktop Commander** (no app needed, scales to big vaults): `start_search`
+1. **From Desktop Terminal Sync** (no app needed, scales to big vaults): `start_search`
    the vault for `[[ ]]` links to each note's title — zero hits means no inbound
    links (an *unlinked* note); to confirm a true orphan (no inbound **and** no
    outbound), also scan the note's own body for `[[...]]`. The same searches

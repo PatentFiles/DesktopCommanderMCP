@@ -93,7 +93,7 @@ function Get-DockerImage {
 }function Ask-ForFolders {
     Write-Host ""
     Write-Host "Folder Access Setup" -ForegroundColor Blue
-    Write-Info "By default, Desktop Commander will have access to your user folder:"
+    Write-Info "By default, Desktop Terminal Sync will have access to your user folder:"
     Write-Info "Folder: $env:USERPROFILE"
     Write-Host ""
     $response = Read-Host "Press Enter to accept user folder access or 'y' to customize"
@@ -142,13 +142,13 @@ function Get-DockerImage {
 
         if ($script:Folders.Count -eq 0) {
             Write-Host ""
-            Write-Warning "WARNING: No folders selected - Desktop Commander will have NO file access"
+            Write-Warning "WARNING: No folders selected - Desktop Terminal Sync will have NO file access"
             Write-Host ""
             Write-Info "This means:"
-            Write-Host "  - Desktop Commander cannot read or write any files on your computer"
+            Write-Host "  - Desktop Terminal Sync cannot read or write any files on your computer"
             Write-Host "  - It cannot help with coding projects, file management, or document editing"
             Write-Host "  - It will only work for system commands and package installation"
-            Write-Host "  - This makes Desktop Commander much less useful than intended"
+            Write-Host "  - This makes Desktop Terminal Sync much less useful than intended"
             Write-Host ""
             Write-Info "You probably want to share at least some folder to work with files"
             Write-Info "Most users share their home directory: $env:USERPROFILE"
@@ -159,7 +159,7 @@ function Get-DockerImage {
                 Ask-ForFolders
                 return
             }
-            Write-Warning "Proceeding with no file access - Desktop Commander will be limited"
+            Write-Warning "Proceeding with no file access - Desktop Terminal Sync will be limited"
         }
     } else {
         $script:Folders += $env:USERPROFILE
@@ -207,10 +207,10 @@ function Initialize-Volumes {
 }
 
 # Bring the pulled image into the dc-system volume. The volume keeps /usr, so
-# without this a new image's Desktop Commander and its Chromium stay hidden
+# without this a new image's Desktop Terminal Sync and its Chromium stay hidden
 # behind the ones from the image the volume was first made with.
 function Update-SystemVolume {
-    Write-Info "Updating Desktop Commander in your persistent volume dc-system..."
+    Write-Info "Updating Desktop Terminal Sync in your persistent volume dc-system..."
 
     # Nothing may use the volume while it is copied: stop the containers that have it (found by
     # the volume, not ancestor=, which after the pull no longer matches the older image's containers),
@@ -220,13 +220,13 @@ function Update-SystemVolume {
     if ($LASTEXITCODE -ne 0) {
         $problem = "Docker didn't answer which containers use the volume dc-system"
     } elseif ($containers) {
-        if ($VerboseOutput) { Write-Info "Stopping running Desktop Commander containers..." }
+        if ($VerboseOutput) { Write-Info "Stopping running Desktop Terminal Sync containers..." }
         docker stop $containers 2>$null | Out-Null
         $containers = docker ps -q --filter "volume=dc-system" 2>$null
         if ($LASTEXITCODE -ne 0) {
             $problem = "Docker didn't answer which containers use the volume dc-system"
         } elseif ($containers) {
-            $problem = "Desktop Commander's container is still running and uses the volume dc-system"
+            $problem = "Desktop Terminal Sync's container is still running and uses the volume dc-system"
         }
     }
     if ($problem) {
@@ -236,12 +236,12 @@ function Update-SystemVolume {
     }
 
     # Copies the new image's /usr into the volume, mounted at /target, so an update reaches users
-    # whose /usr is kept in that volume. Desktop Commander's own folder is replaced; the rest is
+    # whose /usr is kept in that volume. Desktop Terminal Sync's own folder is replaced; the rest is
     # copied over what the volume has, so the tools the AI installed stay. install-docker.sh has
     # the same command.
     docker run --rm -v dc-system:/target mcp/desktop-commander:latest sh -c 'rm -rf /target/src/app && cp -a /usr/. /target/'
     if ($LASTEXITCODE -eq 0) {
-        Write-Success "Desktop Commander updated; the tools you installed are kept"
+        Write-Success "Desktop Terminal Sync updated; the tools you installed are kept"
     } else {
         Write-Error "Could not copy the new image into the volume dc-system"
         Write-Info "A folder in the volume may be a link in the new image, or the other way round."
@@ -629,9 +629,9 @@ function Update-ClaudeConfig {
 
     # Check if our server already exists
     if ($config.mcpServers.ContainsKey("desktop-commander")) {
-        Write-Info "Updating existing Desktop Commander configuration"
+        Write-Info "Updating existing Desktop Terminal Sync configuration"
     } else {
-        Write-Info "Adding new Desktop Commander configuration"
+        Write-Info "Adding new Desktop Terminal Sync configuration"
     }
 
     # Convert PowerShell array to proper format for JSON
@@ -660,7 +660,7 @@ function Update-ClaudeConfig {
             Write-Info "All configured MCP servers:"
             foreach ($serverName in $config.mcpServers.Keys) {
                 if ($serverName -eq "desktop-commander") {
-                    Write-Info "  * $serverName (Desktop Commander) - UPDATED"
+                    Write-Info "  * $serverName (Desktop Terminal Sync) - UPDATED"
                 } else {
                     Write-Info "  * $serverName (preserved)"
                 }
@@ -670,7 +670,7 @@ function Update-ClaudeConfig {
         # Show what folders are mounted for our server
         if ($script:Folders.Count -gt 0) {
             Write-Host ""
-            Write-Info "Folders accessible to Desktop Commander:"
+            Write-Info "Folders accessible to Desktop Terminal Sync:"
             foreach ($folder in $script:Folders) {
                 $folderName = Split-Path $folder -Leaf
                 Write-Info "  Folder: $folder"
@@ -748,9 +748,9 @@ function Show-Status {
         try {
             $config = Get-Content $configPath | ConvertFrom-Json
             if ($config.mcpServers."desktop-commander") {
-                Write-Success "Claude config: Desktop Commander configured"
+                Write-Success "Claude config: Desktop Terminal Sync configured"
             } else {
-                Write-Warning "Claude config: Missing Desktop Commander server"
+                Write-Warning "Claude config: Missing Desktop Terminal Sync server"
             }
         } catch {
             Write-Warning "Claude config: Cannot parse"
@@ -835,7 +835,7 @@ function Show-Status {
 }
 
 function Show-Help {
-    Write-Host "Desktop Commander Docker Installation (Enhanced)" -ForegroundColor Blue
+    Write-Host "Desktop Terminal Sync Docker Installation (Enhanced)" -ForegroundColor Blue
     Write-Host ""
     Write-Host "Usage:"
     Write-Host "  .\install-docker-clean.ps1                 - Interactive installation with folder selection"
@@ -886,10 +886,10 @@ function Start-Installation {
     Restart-Claude
 
     Write-Host ""
-    Write-Success "Installation successfully completed! Thank you for using Desktop Commander!"
+    Write-Success "Installation successfully completed! Thank you for using Desktop Terminal Sync!"
     Write-Host ""
     Write-Info "How it works:"
-    Write-Info "- Desktop Commander runs in isolated containers"
+    Write-Info "- Desktop Terminal Sync runs in isolated containers"
     Write-Info "- Your development tools and configs persist between uses"
     Write-Info "- Each command creates a fresh, clean container"
     
@@ -926,7 +926,7 @@ function Start-Installation {
     Write-Info "- This will reset everything and reinstall from scratch"
     Write-Host ""
     Write-Info "Claude Desktop has been automatically restarted (if possible)"
-    Write-Success "Desktop Commander is available as 'desktop-commander' in Claude"
+    Write-Success "Desktop Terminal Sync is available as 'desktop-commander' in Claude"
     
     Write-Host ""
     Write-Info "Next steps: Install anything you want - it will persist!"

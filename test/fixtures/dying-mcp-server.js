@@ -3,7 +3,7 @@
 /**
  * Test fixture: a minimal stdio MCP server that dies in the middle of a tool
  * call, reproducing the shape of issue #658 (a large multi-image response kills
- * the local Desktop Commander child while the call is still in flight).
+ * the local Desktop Terminal Sync child while the call is still in flight).
  *
  * Behaviour:
  *   - `initialize` gets a normal handshake response

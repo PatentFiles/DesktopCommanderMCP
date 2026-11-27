@@ -5,7 +5,7 @@ import { logger } from './logger.js';
 /**
  * Ending a process together with every process it started.
  *
- * Desktop Commander runs commands through a shell (start_process) or a fresh
+ * Desktop Terminal Sync runs commands through a shell (start_process) or a fresh
  * Node process (node:local), so the process it holds is only the root of what
  * the command runs: the shell starts the program, which may start more
  * (npm -> node -> a dev server holding a port). Killing the root alone ends

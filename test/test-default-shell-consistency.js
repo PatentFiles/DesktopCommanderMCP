@@ -1,6 +1,6 @@
 /**
  * With no shell configured, start_process must run commands in the shell
- * Desktop Commander tells the AI about (system info) and gives a new config.
+ * Desktop Terminal Sync tells the AI about (system info) and gives a new config.
  * These used to be decided in separate places: on Windows system info and a
  * new config said powershell.exe while start_process ran cmd.exe (%ComSpec%).
  * The command check reads the command with the shell start_process runs, with

@@ -3,14 +3,14 @@ name: terminal
 version: 0.1.0
 audience: agent
 description: >-
-  Use Desktop Commander for terminal and command-line work, especially anything
+  Use Desktop Terminal Sync for terminal and command-line work, especially anything
   that needs a shell whose state persists across turns: Python/Node REPLs,
   database shells, dev servers and other long-running processes, SSH into remote
   machines, and Windows PowerShell. Also handles everyday terminal tasks —
   navigating folders, choosing the right command for the user's shell
   (PowerShell, cmd, bash, zsh), running Docker/curl/cloud-CLI commands,
   inspecting processes and ports, and saving recurring workflows as scripts —
-  even when the user doesn't say "Desktop Commander" or "terminal." Reach for it
+  even when the user doesn't say "Desktop Terminal Sync" or "terminal." Reach for it
   on pasted errors like "command not found", "permission denied", "EADDRINUSE",
   "address already in use", "npm ERR!", "ModuleNotFoundError", or "ENOENT", and
   on intents like "what's using port 3000", "kill that process", "ssh into my
@@ -22,20 +22,20 @@ description: >-
 
 Be a calm, safe, cross-platform terminal copilot. The user may be an expert or
 may be opening a terminal for the first time — read their cues and match them.
-Explain what a command does in plain language, run it through Desktop Commander,
+Explain what a command does in plain language, run it through Desktop Terminal Sync,
 read the real output, and explain the result. The user's machine is the source
 of truth; never assume the OS, shell, or installed tools — detect them.
 
 ## 1. Detect the environment first (do this before suggesting commands)
 
 Different OSes and shells need different commands. Before recommending or running
-anything non-trivial, call **`get_config`** (Desktop Commander) and read
+anything non-trivial, call **`get_config`** (Desktop Terminal Sync) and read
 `systemInfo`:
 
 - `platformName` / `isWindows` / `isMacOS` / `isLinux` — which OS.
 - `defaultShell` and `uiHints.availableShells` — which shell to target.
 - `pythonInfo`, `nodeInfo` — whether Python/Node exist and their versions.
-- `blockedCommands` — commands Desktop Commander refuses to run (see §7).
+- `blockedCommands` — commands Desktop Terminal Sync refuses to run (see §7).
 - `allowedDirectories` — `[]` means full access; otherwise commands/paths are
   scoped to those directories.
 
@@ -64,7 +64,7 @@ contain spaces; PowerShell and bash quote/escape differently; `~` expands in
 bash/zsh but not in cmd. When in doubt, prefer the cross-platform tool the user
 already has (e.g. `python`, `node`, `git`) over shell-specific syntax.
 
-## 3. Running commands with Desktop Commander
+## 3. Running commands with Desktop Terminal Sync
 
 **Always use absolute paths.** Relative paths depend on a working directory that
 isn't carried between calls, so they fail unpredictably.
@@ -117,7 +117,7 @@ read_process_output(pid)             # pull more output if needed
 
 ## 5. Inspecting processes and ports
 
-- **Processes**: `list_processes` (Desktop Commander) for a structured view, or
+- **Processes**: `list_processes` (Desktop Terminal Sync) for a structured view, or
   `ps aux` (Unix) / `Get-Process` (PowerShell). Stop one with `kill_process` by
   PID (`force_terminate` ends a session you started).
 - **What's using a port**:
@@ -148,7 +148,7 @@ blocks (read the resolved error line), non-zero exit codes (report the code).
 
 ## 7. Safety: destructive commands and chaining
 
-Desktop Commander already refuses a built-in `blockedCommands` list (things like
+Desktop Terminal Sync already refuses a built-in `blockedCommands` list (things like
 `sudo`, `mkfs`, `format`, `dd`, `fdisk`, `shutdown`, `reboot`, `diskpart`,
 `reg`, `net`). Read the live list from `get_config`; don't assume it.
 

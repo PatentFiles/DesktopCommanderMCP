@@ -11,7 +11,7 @@ description: >-
   a "tune-up", "checkup", "system report", "health check", or "is my Mac/PC/laptop
   healthy". Trigger even on casual phrasing like "my laptop feels slow", "why is my fan
   so loud", "my computer is laggy", "running out of space", or "clean up my machine".
-  Works on macOS, Windows, and Linux. This is a Desktop Commander skill: it relies on a
+  Works on macOS, Windows, and Linux. This is a Desktop Terminal Sync skill: it relies on a
   real local shell (start_process / interact_with_process) and is strictly read-only by
   default — it never needs sudo and only performs cleanups the user explicitly approves.
 ---
@@ -24,7 +24,7 @@ Give the user a fast, trustworthy picture of their computer's health and a short
 of actions worth taking — the way a good technician would: look first, explain plainly,
 fix only with permission.
 
-It runs entirely through Desktop Commander's local shell, gathers a batch of **read-only**
+It runs entirely through Desktop Terminal Sync's local shell, gathers a batch of **read-only**
 diagnostics, scores each area, prints a concise summary **in the chat**, and then offers
 cleanup suggestions the user can approve one by one.
 
@@ -51,7 +51,7 @@ This is the part that makes users trust the skill, so honor it strictly:
 
 Determine the platform before doing anything else, because the commands differ.
 
-- Quickest: read Desktop Commander's config (`get_config`) and use the
+- Quickest: read Desktop Terminal Sync's config (`get_config`) and use the
   `systemInfo.isMacOS` / `isWindows` / `isLinux` booleans (or `platformName`) to
   pick the platform.
 - Or run `uname` (macOS/Linux) — if it fails, assume Windows.

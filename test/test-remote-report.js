@@ -11,7 +11,7 @@
  * how Node runs (the Node executable and the entry script, the home folder
  * shown as ~, and what kind of install each is), the clock skew read from the
  * server's Date header, network timings to the server, Supabase REST and the
- * realtime websocket, whether Desktop Commander MCP is running right now
+ * realtime websocket, whether Desktop Terminal Sync is running right now
  * (count and earliest start, from the process list), the device id and yes/no
  * facts about the rest of device.json, and only telemetryEnabled and clientId
  * from config.json.
@@ -204,7 +204,7 @@ async function runTests() {
             assert.strictEqual(upload.headers['content-type'], 'application/zip');
             assert.strictEqual(upload.headers['x-dc-user-id'], standIn.userId, 'the user id is the saved token\'s sub');
             assert.strictEqual(upload.headers['x-dc-device-id'], standIn.deviceId);
-            assert.match(run.output, new RegExp(`\\n\\[\\d{2}:\\d{2}:\\d{2}\\] Sent to Desktop Commander support\\. Report id: ${standIn.reportId}\\n`), run.output);
+            assert.match(run.output, new RegExp(`\\n\\[\\d{2}:\\d{2}:\\d{2}\\] Sent to Desktop Terminal Sync support\\. Report id: ${standIn.reportId}\\n`), run.output);
             assert.match(run.output, /\n\[\d{2}:\d{2}:\d{2}\] Give this id to support\. We keep it for 7 days, then delete it\.\n/);
             assert(!run.output.includes('Reply to your support conversation'), 'sent: no "attach it yourself" line');
         });
@@ -223,7 +223,7 @@ async function runTests() {
         });
 
         await test('report.txt says what it contains and what it does not', () => {
-            assert.match(reportTxt, /^Desktop Commander diagnostics — \d{4}-\d\d-\d\d \d\d:\d\d:\d\d \(UTC[+-]\d+(:\d\d)?\)\n/);
+            assert.match(reportTxt, /^Desktop Terminal Sync diagnostics — \d{4}-\d\d-\d\d \d\d:\d\d:\d\d \(UTC[+-]\d+(:\d\d)?\)\n/);
             assert.match(reportTxt, /\nThis file contains: versions, how Node runs \(paths, with the home folder as ~\), clock, network checks, the device id and whether sign-in data exists \(yes\/no\), device status history\.\n/);
             assert.match(reportTxt, /\nIt does not contain: tokens, passwords, emails, the user name, tool arguments or results\.\n/);
             for (const label of ['Versions', 'Node', 'Running', 'MCP', 'Clock', 'Network', 'Device', 'Settings', 'Device log']) {
@@ -232,7 +232,7 @@ async function runTests() {
         });
 
         await test('versions include npm, and how Node runs shows both paths and their kinds', () => {
-            assert.match(reportTxt, /\nVersions +Desktop Commander \d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)? · Node \d+\.\d+\.\d+ · npm (\d+\.\d+\.\d+|not found) · \S/, reportTxt);
+            assert.match(reportTxt, /\nVersions +Desktop Terminal Sync \d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)? · Node \d+\.\d+\.\d+ · npm (\d+\.\d+\.\d+|not found) · \S/, reportTxt);
             assert.match(reportJson?.versions?.npm ?? '', /^\d+\.\d+\.\d+/, 'npm is on PATH here, so its version is known');
             const nodeLine = reportTxt.match(/\nNode +(.*)\n/)?.[1] ?? '';
             assert.match(nodeLine, /node(\.exe)? \((global install|nvm|fnm|Volta|asdf|mise|Homebrew|Claude Desktop's bundled Node|unknown)\)$/, nodeLine);
@@ -522,9 +522,9 @@ async function runTests() {
             });
         });
 
-        // #692: Desktop Commander reads a config.json saved as "UTF-8 with BOM" (Notepad,
+        // #692: Desktop Terminal Sync reads a config.json saved as "UTF-8 with BOM" (Notepad,
         // PowerShell 5's Set-Content -Encoding UTF8); the report must read the same settings
-        await test('a config.json saved with a UTF-8 BOM gives its telemetry and client id, as Desktop Commander reads it', async () => {
+        await test('a config.json saved with a UTF-8 BOM gives its telemetry and client id, as Desktop Terminal Sync reads it', async () => {
             await inOtherHome(async (other) => {
                 const configPath = path.join(other.home, '.claude-server-commander', 'config.json');
                 fs.mkdirSync(path.dirname(configPath), { recursive: true });
@@ -533,12 +533,12 @@ async function runTests() {
                 const result = await runReport(other.env, ['--no-upload']);
                 assert.strictEqual(result.code, 0, result.output);
                 assert.deepStrictEqual(JSON.parse(zipFile(result, 'report.json')).settings, saved,
-                    'with config.json saved as UTF-8 with BOM, the report misses the settings Desktop Commander reads');
+                    'with config.json saved as UTF-8 with BOM, the report misses the settings Desktop Terminal Sync reads');
                 assert.match(zipFile(result, 'report.txt'), new RegExp(`\\nSettings +telemetry: off · client id: ${CLIENT_ID}`));
             });
         });
 
-        await test('Desktop Commander MCP: nested servers separately; a bootstrap pair once', async () => {
+        await test('Desktop Terminal Sync: nested servers separately; a bootstrap pair once', async () => {
             const dcScript = fakePackage(path.join(home, 'fake-dc'), '@wonderwhy-er/desktop-commander');
             const otherScript = fakePackage(path.join(home, 'other-app'), 'other-app');
             const pairScript = fakePackage(path.join(home, 'fake-dc-pair'), '@wonderwhy-er/desktop-commander', STARTS_A_COPY);
@@ -586,7 +586,7 @@ async function runTests() {
             }
         });
 
-        await test('Desktop Commander MCP: "not running" with no copy, and the count and start time with some', async () => {
+        await test('Desktop Terminal Sync: "not running" with no copy, and the count and start time with some', async () => {
             const { formatReport } = await import('../dist/remote-device/diagnostics/report.js');
             const lineOf = (mcp) => formatReport({ ...reportJson, desktopCommanderMcp: mcp }).split('\n').find((l) => l.startsWith('MCP '));
             assert.strictEqual(lineOf({ running: 0, since: null }), 'MCP           not running');

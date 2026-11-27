@@ -38,7 +38,7 @@ https.request = (options, callback) => {
   return req;
 };
 syncBuiltinESMExports();
-delete process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY;
+delete process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY;
 
 const { server } = await import('../dist/server.js');
 

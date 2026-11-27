@@ -149,7 +149,7 @@ async function runFlagManager(url, steps, { hangingFetch = false } = {}) {
         DC_FLAG_URL: url,
         FLAGS_MODULE,
         STEPS: steps.join(','),
-        DESKTOP_COMMANDER_DISABLE_TELEMETRY: '1',
+        DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY: '1',
         ...(hangingFetch ? { STUB_HANGING_FETCH: '1' } : {}),
       },
       stdio: ['ignore', 'pipe', 'pipe'],

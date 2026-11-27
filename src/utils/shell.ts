@@ -66,7 +66,7 @@ export function isShellAvailable(shell: string): boolean {
  * The full path to start a program by: the one found on PATH. Windows looks
  * for a bare name ("powershell.exe", "cmd", "tasklist") in the working folder
  * before PATH, so a file of that name there would run instead; every program
- * Desktop Commander starts by name goes through here. On Windows a bare name
+ * Desktop Terminal Sync starts by name goes through here. On Windows a bare name
  * not found on PATH is an error rather than a name Windows would look up in
  * the working folder. A path (absolute, or with a folder in it) is kept as
  * given, and so is a bare name elsewhere, where the working folder isn't searched.
@@ -111,7 +111,7 @@ function getRepairedPathExt(): string {
 }
 
 /**
- * The environment for what Desktop Commander runs for the AI (start_process
+ * The environment for what Desktop Terminal Sync runs for the AI (start_process
  * commands, node:local code): the server's own, with on Windows what a
  * client's launch broke or left out put back. PATHEXT is repaired (#481).
  * ProgramData is set when missing: a client on the MCP SDK's default

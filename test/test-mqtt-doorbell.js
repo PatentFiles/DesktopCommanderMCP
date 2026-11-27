@@ -10,7 +10,7 @@ import { connectAsync } from 'mqtt';
 import forge from 'node-forge';
 
 for (const key of Object.keys(process.env)) if (key.startsWith('MQTT_')) delete process.env[key];
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 const { RemoteChannel } = await import('../dist/remote-device/remote-channel.js');
 const { rolloutManager } = await import('../dist/remote-device/rollouts.js');
 rolloutManager.update({ MQTT_TRANSPORT_ENABLED: true });
@@ -51,7 +51,7 @@ https.request = (options, onResponse) => {
     return request;
 };
 syncBuiltinESMExports();
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '0';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '0';
 
 const broker = aedes();
 const sockets = new Set();
@@ -371,7 +371,7 @@ try {
     assert.throws(() => mqttDoorbellTopic('owner/foreign', 'device'), /identity/);
     console.log('PASS MQTT shadow doorbells: observation-only receipt, Broadcast execution, identifier-only results, sanitized persistence, concurrent result cleanup, mutual TLS, telemetry, duplicates, validation, reconnect and shutdown');
 } finally {
-    process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+    process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
     for (const channel of channels) await channel.stopMqttTransport();
     await pendingReceiver?.stop();
     await publisher?.endAsync(true);

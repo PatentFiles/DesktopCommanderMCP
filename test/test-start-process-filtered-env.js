@@ -1,6 +1,6 @@
 /**
  * #702: on Windows, ssh.exe started through start_process exited 255 and
- * printed nothing. A host built on the MCP SDK starts Desktop Commander with
+ * printed nothing. A host built on the MCP SDK starts Desktop Terminal Sync with
  * the SDK's default environment unless it passes its own: 12 variables on
  * Windows (getDefaultEnvironment(), SDK 1.32.1), and ProgramData is not one of
  * them. What the AI runs (start_process commands, node:local code) gets the
@@ -24,9 +24,9 @@ const PROGRAM_DATA = /ProgramData=\[[A-Za-z]:\\ProgramData\]/i;
 
 /** The server as a host on the MCP SDK starts it by default, plus the test run's telemetry and flag switches */
 function connectWithDefaultEnvironment() {
-  const { DESKTOP_COMMANDER_DISABLE_TELEMETRY, DC_FLAG_URL } = process.env;
+  const { DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY, DC_FLAG_URL } = process.env;
   return connectToServer('test-start-process-filtered-env',
-    { ...getDefaultEnvironment(), DESKTOP_COMMANDER_DISABLE_TELEMETRY, DC_FLAG_URL });
+    { ...getDefaultEnvironment(), DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY, DC_FLAG_URL });
 }
 
 /** The text a tool answers with */

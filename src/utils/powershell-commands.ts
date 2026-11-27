@@ -32,7 +32,7 @@ export const HELPER_TIMEOUT_MS = 5000;
  */
 export const HELPER_START_TIMEOUT_MS = 15000;
 
-/** The folder Desktop Commander is installed in, where its own node:local process runs too */
+/** The folder Desktop Terminal Sync is installed in, where its own node:local process runs too */
 const mcpRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 /**
@@ -350,9 +350,9 @@ export class PowerShellHelper {
     child.stdin?.on('error', () => {});
     child.on('error', (error) => this.ended(child, `PowerShell could not start: ${error.message}`));
     child.on('exit', (code, signal) => this.ended(child, `PowerShell ended before it answered (${signal ?? `exit code ${code}`})`));
-    // The helper never keeps Desktop Commander running; a waiting read's timer does until it's answered
+    // The helper never keeps Desktop Terminal Sync running; a waiting read's timer does until it's answered
     child.unref();
-    // The pipes are sockets: unref() keeps them from holding Desktop Commander open
+    // The pipes are sockets: unref() keeps them from holding Desktop Terminal Sync open
     (child.stdin as Socket).unref();
     (child.stdout as Socket).unref();
     (child.stderr as Socket).unref();

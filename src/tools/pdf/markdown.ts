@@ -50,7 +50,7 @@ interface MdToPdfDependencies {
 }
 
 // md-to-pdf, with its own Puppeteer, file server and front matter parser, loaded the
-// way md-to-pdf loads them (they are its dependencies, not Desktop Commander's)
+// way md-to-pdf loads them (they are its dependencies, not Desktop Terminal Sync's)
 export const mdToPdfPackage = new LazyPackage<MdToPdfDependencies>('md-to-pdf', 'PDF writing support', () => {
     const requireFromMdToPdf = createRequire(require.resolve('md-to-pdf'));
     const { convertMdToPdf }: typeof import('md-to-pdf/dist/lib/md-to-pdf.js') = require('md-to-pdf/dist/lib/md-to-pdf.js');
@@ -65,16 +65,16 @@ export const mdToPdfPackage = new LazyPackage<MdToPdfDependencies>('md-to-pdf', 
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
     typeof value === 'object' && value !== null && !Array.isArray(value);
 
-/** An option Desktop Commander ignored from write_pdf's options or the markdown's front matter */
+/** An option Desktop Terminal Sync ignored from write_pdf's options or the markdown's front matter */
 export interface IgnoredRenderOption {
     /** Dotted option name, e.g. "pdf_options.path" */
     option: string;
-    /** Why Desktop Commander ignores it */
+    /** Why Desktop Terminal Sync ignores it */
     reason: string;
 }
 
 /**
- * The md-to-pdf options Desktop Commander ignores, and why. Every other option
+ * The md-to-pdf options Desktop Terminal Sync ignores, and why. Every other option
  * from write_pdf's `options` and from the markdown's front matter applies as
  * md-to-pdf normally applies it. These few are ignored because they would let
  * the markdown or the caller write the PDF somewhere other than the requested
@@ -82,24 +82,24 @@ export interface IgnoredRenderOption {
  * (launch_options.executablePath), pass their own flags to it
  * (launch_options.args), change the browser process in other ways (every
  * launch option but ALLOWED_LAUNCH_OPTIONS), or hold the browser open forever
- * (devtools). Desktop Commander writes the PDF itself, to the validated path,
+ * (devtools). Desktop Terminal Sync writes the PDF itself, to the validated path,
  * and runs the renderer on a browser and profile it controls.
  */
 const IGNORED_RENDER_OPTIONS: Record<string, string> = {
-    'dest': 'Desktop Commander writes the PDF only to the path you requested',
-    'devtools': 'Desktop Commander does not open the renderer with devtools (it would never finish)',
-    'pdf_options.path': 'Desktop Commander writes the PDF only to the path you requested',
-    'launch_options.executablePath': 'Desktop Commander chooses the browser used to render',
-    'launch_options.args': 'Desktop Commander controls the arguments the browser is launched with',
+    'dest': 'Desktop Terminal Sync writes the PDF only to the path you requested',
+    'devtools': 'Desktop Terminal Sync does not open the renderer with devtools (it would never finish)',
+    'pdf_options.path': 'Desktop Terminal Sync writes the PDF only to the path you requested',
+    'launch_options.executablePath': 'Desktop Terminal Sync chooses the browser used to render',
+    'launch_options.args': 'Desktop Terminal Sync controls the arguments the browser is launched with',
 };
 
 /**
  * The launch_options (Puppeteer's LaunchOptions) that apply: they only change
- * how the page renders or how long Desktop Commander waits. Every other launch
+ * how the page renders or how long Desktop Terminal Sync waits. Every other launch
  * option is ignored. Those set what runs and how: the browser's environment
  * (env, which could preload a library into it or undo the Windows profile
  * fix), where its output goes (dumpio pipes it to stdout, the MCP
- * connection), how Desktop Commander connects to it (pipe, debuggingPort,
+ * connection), how Desktop Terminal Sync connects to it (pipe, debuggingPort,
  * protocol), its arguments and extensions (ignoreDefaultArgs,
  * enableExtensions), where it saves downloads (downloadBehavior), which browser
  * runs (browser, channel), or how this process handles signals (handleSIGINT,
@@ -109,7 +109,7 @@ const ALLOWED_LAUNCH_OPTIONS = new Set([
     'headless', 'timeout', 'protocolTimeout', 'slowMo', 'defaultViewport',
     'acceptInsecureCerts', 'networkEnabled', 'waitForInitialPage',
 ]);
-const LAUNCH_OPTION_REASON = `Desktop Commander controls how the browser is launched; of launch_options, only ${[...ALLOWED_LAUNCH_OPTIONS].join(', ')} apply`;
+const LAUNCH_OPTION_REASON = `Desktop Terminal Sync controls how the browser is launched; of launch_options, only ${[...ALLOWED_LAUNCH_OPTIONS].join(', ')} apply`;
 
 interface ResolvedRender {
     /** The markdown body, with the front matter removed */
@@ -144,7 +144,7 @@ function safeGrayMatterOptions(callerOptions: unknown): Record<string, unknown> 
 /**
  * The single place write_pdf's `options` and the markdown's front matter are
  * merged. Front matter wins (as in md-to-pdf), pdf_options is merged key by
- * key, and the options Desktop Commander ignores are removed from the merged
+ * key, and the options Desktop Terminal Sync ignores are removed from the merged
  * result AFTER the merge, so neither source can re-add them. Returns the
  * markdown body without its front matter, so the caller can render it without
  * md-to-pdf merging the front matter a second time.
@@ -199,7 +199,7 @@ interface CachedPuppeteerChrome {
 }
 
 /**
- * Get Desktop Commander's private Puppeteer cache directory.
+ * Get Desktop Terminal Sync's private Puppeteer cache directory.
  */
 function getPuppeteerCacheDir(): string {
     return join(dirname(CONFIG_FILE), 'puppeteer-cache');
@@ -362,7 +362,7 @@ export function findSystemChrome(): string | undefined {
  * drive it, whenever it cannot resolve its default profile directory, even
  * though Puppeteer runs it on a separate temporary profile. On Windows Chrome
  * resolves that directory under %USERPROFILE%\AppData\Local and fails if the
- * folder is missing, so when Desktop Commander runs with USERPROFILE pointing
+ * folder is missing, so when Desktop Terminal Sync runs with USERPROFILE pointing
  * at any other folder (e.g. a relocated home), Chrome starts without a
  * DevTools endpoint and Puppeteer times out with a misleading "The browser is
  * already running" error. Chrome gets the account's real profile folder,
@@ -606,11 +606,11 @@ async function serveAllowedFile(request: IncomingMessage, response: ServerRespon
  * Local web server for one PDF render.
  *
  * md-to-pdf loads the page it renders from http://localhost:<port>/, served
- * from the markdown's base folder (Desktop Commander's working folder unless
+ * from the markdown's base folder (Desktop Terminal Sync's working folder unless
  * the caller passes basedir), so relative and absolute image paths in the
  * markdown load. md-to-pdf's own server listens on every network interface,
  * answers anyone, and is closed only after a successful render: after a
- * failed one it kept serving the working folder until Desktop Commander
+ * failed one it kept serving the working folder until Desktop Terminal Sync
  * restarted. This one listens on 127.0.0.1 only, answers only requests that
  * carry a random cookie set in the render's own Chrome, and serves files, not
  * folder listings, only from inside the allowed folders (serveAllowedFile).
@@ -680,7 +680,7 @@ async function installChrome(): Promise<CachedPuppeteerChrome> {
 /**
  * Find or install Chrome for PDF generation
  * Priority: 1. Puppeteer cache, 2. System Chrome, 3. Install Chrome
- * (in Desktop Commander's Docker image the system's Chromium comes first)
+ * (in Desktop Terminal Sync's Docker image the system's Chromium comes first)
  * Results are cached to avoid repeated lookups
  */
 async function getChromePath(): Promise<string | undefined> {
@@ -778,8 +778,8 @@ export async function parsePdfToMarkdown(source: string, pageNumbers: number[] |
  * exited.
  *
  * Options are md-to-pdf's, from `options` and the markdown's front matter
- * (resolveRender merges them and drops the few Desktop Commander ignores).
- * The PDF is only returned: Desktop Commander writes it, so the config forces
+ * (resolveRender merges them and drops the few Desktop Terminal Sync ignores).
+ * The PDF is only returned: Desktop Terminal Sync writes it, so the config forces
  * dest to '' (md-to-pdf would otherwise write it to dest, or to stdout - the
  * MCP connection - when dest is undefined).
  */
@@ -808,10 +808,10 @@ export async function parseMarkdownToPdf(markdown: string, options: any = {}): P
 
         browser = await puppeteer.launch({
             // Only the launch options resolveRender allows (ALLOWED_LAUNCH_OPTIONS);
-            // Desktop Commander's own settings below come after them
+            // Desktop Terminal Sync's own settings below come after them
             ...launchOptions,
             ...(chromeEnv ? { env: chromeEnv } : {}),
-            // Desktop Commander chooses the browser (launch_options.executablePath is dropped by resolveRender)
+            // Desktop Terminal Sync chooses the browser (launch_options.executablePath is dropped by resolveRender)
             ...(chromePath ? { executablePath: chromePath } : {}),
             // Chrome runs on the render's own profile whatever the caller asked for
             // (launch_options.args is dropped by resolveRender; userDataDir is overridden here)

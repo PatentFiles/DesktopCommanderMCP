@@ -1,5 +1,5 @@
 /**
- * The user's path to Desktop Commander: the built server (dist/index.js) in
+ * The user's path to Desktop Terminal Sync: the built server (dist/index.js) in
  * its own process, talked to over stdio with the SDK client, as an MCP client
  * does. Closing the client ends the server.
  */

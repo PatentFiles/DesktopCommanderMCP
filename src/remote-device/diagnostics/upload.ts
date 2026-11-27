@@ -2,7 +2,7 @@ import fs from 'fs';
 import { getRemoteDeviceConfigPath } from '../remote-utils.js';
 
 /**
- * Sends the diagnostics zip to Desktop Commander's diagnostics Worker, which
+ * Sends the diagnostics zip to Desktop Terminal Sync's diagnostics Worker, which
  * stores it for 7 days and answers with a report id the user gives support.
  *
  * The address comes only from the server's /api/mcp-info `diagnosticsUrl`, so

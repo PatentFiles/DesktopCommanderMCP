@@ -2,12 +2,12 @@
   "$schema": "../../dist/mcpb-manifest.schema.json",
   "manifest_version": "0.3",
   "name": "desktop-commander",
-  "display_name": "Desktop Commander",
+  "display_name": "Desktop Terminal Sync",
   "version": "{{VERSION}}",
   "description": "Build, explore, and automate on your local machine with access to files and terminal.",
-  "long_description": "Combine local filesystem access with full terminal control to handle technical tasks through natural language. Desktop Commander empowers you to build, explore, and automate - from organizing repositories to creating complete applications:\n* **Build from scratch** - Create features and applications with simple commands\n* **Manage development environments** - Set up servers, configure systems, and handle processes\n* **Manage context and documentation** - Keep track of project details and technical specifications\n* **Explore existing codebases and projects** - Navigate and understand complex repositories\n\nThis extension bridges technical skill gaps by providing full command-line superpowers through an interface that understands your intent and handles complexity automatically.",
+  "long_description": "Combine local filesystem access with full terminal control to handle technical tasks through natural language. Desktop Terminal Sync empowers you to build, explore, and automate - from organizing repositories to creating complete applications:\n* **Build from scratch** - Create features and applications with simple commands\n* **Manage development environments** - Set up servers, configure systems, and handle processes\n* **Manage context and documentation** - Keep track of project details and technical specifications\n* **Explore existing codebases and projects** - Navigate and understand complex repositories\n\nThis extension bridges technical skill gaps by providing full command-line superpowers through an interface that understands your intent and handles complexity automatically.",
   "author": {
-    "name": "Desktop Commander Team",
+    "name": "Desktop Terminal Sync Team",
     "email": "er@desktopcommander.app",
     "url": "https://desktopcommander.app/"
   },
@@ -133,7 +133,7 @@
     },
     {
       "name": "give_feedback_to_desktop_commander",
-      "description": "Open feedback form in browser to provide feedback about Desktop Commander."
+      "description": "Open feedback form in browser to provide feedback about Desktop Terminal Sync."
     }
   ],
   "keywords": [

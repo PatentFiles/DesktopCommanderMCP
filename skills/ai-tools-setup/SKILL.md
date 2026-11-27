@@ -4,7 +4,7 @@ version: 0.1.0
 audience: agent
 description: >-
   Set up, connect, validate, and repair Claude Desktop and MCP servers using
-  Desktop Commander — inspecting and fixing mcp.json / claude_desktop_config.json,
+  Desktop Terminal Sync — inspecting and fixing mcp.json / claude_desktop_config.json,
   getting MCP servers to connect, and diagnosing local AI tooling. Use when a
   user wants to install, configure, connect, validate, or fix Claude Desktop, an
   MCP server, an MCP config file, or a local AI agent/gateway. Trigger on the
@@ -18,7 +18,7 @@ description: >-
 # AI Tools Setup Assistant
 
 Help users install, configure, and repair AI tooling on their own machine using
-Desktop Commander's file and terminal tools. The work is usually
+Desktop Terminal Sync's file and terminal tools. The work is usually
 **configure-and-troubleshoot**, not clean installs — assume something already
 exists and may be half-broken.
 

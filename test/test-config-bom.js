@@ -3,7 +3,7 @@
  * `Set-Content -Encoding UTF8`) still holds the user's whole config. Read as
  * text, it starts with an invisible U+FEFF that JSON.parse rejects, so every
  * start failed with `MCP error -32603: Unexpected token '﻿', "﻿{…"... is not
- * valid JSON`. Desktop Commander must read it as the config it is: start, and
+ * valid JSON`. Desktop Terminal Sync must read it as the config it is: start, and
  * apply the user's own settings, not treat the file as damaged.
  *
  * Starts the real server over stdio (dist/index.js) the way `remote` does.

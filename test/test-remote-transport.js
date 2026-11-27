@@ -29,7 +29,7 @@ const DASHBOARD_FRESHNESS_MS = 7 * 60 * 1000;
 const DEVICE_ID = 'device-1';
 const OTHER_DEVICE = 'device-2';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 let failures = 0;
 async function test(name, fn) {

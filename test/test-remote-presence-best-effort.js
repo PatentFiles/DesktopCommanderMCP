@@ -15,7 +15,7 @@ import assert from 'node:assert';
 import { RemoteChannel } from '../dist/remote-device/remote-channel.js';
 import { runIfMain } from './helpers/run-if-main.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 const DEVICE_ID = 'device-1';
 

@@ -1116,7 +1116,7 @@ export async function validatePdfOperationPaths(
  * @param filePath Path to the output PDF file
  * @param content Markdown string (for creation) or array of operations (for modification)
  * @param options Options for PDF generation or modification. For modification, can include `sourcePdf`.
- * @returns The render options Desktop Commander ignored (see resolveRender), so the caller can report them.
+ * @returns The render options Desktop Terminal Sync ignored (see resolveRender), so the caller can report them.
  */
 export async function writePdf(
     filePath: string,

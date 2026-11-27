@@ -1,5 +1,5 @@
-// Repro: a Desktop Commander process frozen for over 30 s while it holds the
-// config lock dies once it runs again, if another Desktop Commander process
+// Repro: a Desktop Terminal Sync process frozen for over 30 s while it holds the
+// config lock dies once it runs again, if another Desktop Terminal Sync process
 // wrote config.json meanwhile (seen as a failed test-search-without-ripgrep.js
 // in a full Windows run: "Error: Unable to update lock within the stale
 // threshold { code: 'ECOMPROMISED' }").

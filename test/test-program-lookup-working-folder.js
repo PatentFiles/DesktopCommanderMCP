@@ -1,5 +1,5 @@
 /**
- * Desktop Commander starts the programs it names (shells, tasklist, python,
+ * Desktop Terminal Sync starts the programs it names (shells, tasklist, python,
  * cmd) from PATH, never a file of the same name in its working folder.
  *
  * On Windows a bare program name was looked up in the working folder before

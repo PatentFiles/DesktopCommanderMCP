@@ -10,7 +10,7 @@ import path from 'node:path';
 import { mock } from 'node:test';
 import forge from 'node-forge';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 const { enrollMqttDevice } = await import('../dist/remote-device/mqtt/mqtt-enrollment.js');
 const { getRemoteDeviceConfigDirectory } = await import('../dist/remote-device/remote-utils.js');
 const { RemoteChannel } = await import('../dist/remote-device/remote-channel.js');

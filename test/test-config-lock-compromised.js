@@ -4,7 +4,7 @@
  *
  * proper-lockfile refreshes the lock every 10 s. If the process couldn't run
  * for over 30 s while inside a config write (machine sleep, a suspended
- * process, a blocked event loop), another Desktop Commander process that
+ * process, a blocked event loop), another Desktop Terminal Sync process that
  * writes config.json meanwhile finds the lock stale and takes it over. When
  * the first one runs again, its refresh finds the lock no longer its own, and
  * proper-lockfile's default reaction throws from a timer: an uncaught

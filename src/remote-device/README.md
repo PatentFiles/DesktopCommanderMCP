@@ -1,14 +1,14 @@
-# Desktop Commander Remote MCP
+# Desktop Terminal Sync Remote MCP
 
-Desktop Commander Remote MCP lets web-based AI clients such as **ChatGPT** and **Claude** use Desktop Commander tools on your computer. The Remote Device is a local process that connects your machine to the Desktop Commander Remote MCP service; commands still execute locally under your user account.
+Desktop Terminal Sync Remote MCP lets web-based AI clients such as **ChatGPT** and **Claude** use Desktop Terminal Sync tools on your computer. The Remote Device is a local process that connects your machine to the Desktop Terminal Sync Remote MCP service; commands still execute locally under your user account.
 
 ## Quick start
 
 ### Prerequisites
 
 - Node.js 18 or newer
-- A Desktop Commander account
-- An AI client that can connect to the Desktop Commander Remote MCP
+- A Desktop Terminal Sync account
+- An AI client that can connect to the Desktop Terminal Sync Remote MCP
 
 ### 1. Start the Remote Device
 
@@ -18,7 +18,7 @@ The recommended command is:
 npx @wonderwhy-er/desktop-commander@latest remote
 ```
 
-If Desktop Commander is installed globally, the shorter equivalent is:
+If Desktop Terminal Sync is installed globally, the shorter equivalent is:
 
 ```bash
 desktop-commander remote
@@ -26,7 +26,7 @@ desktop-commander remote
 
 ### 2. Authenticate
 
-On first run, Desktop Commander starts an OAuth device-authorization flow:
+On first run, Desktop Terminal Sync starts an OAuth device-authorization flow:
 
 1. A browser window opens to the verification page.
 2. Confirm that the verification code matches the code printed in your terminal.
@@ -49,7 +49,7 @@ On POSIX systems, the file is created with mode `0600` (read/write for the ownin
 
 ### 3. Connect your AI
 
-Open **[mcp.desktopcommander.app](https://mcp.desktopcommander.app)** and follow the connection instructions for your AI client. Once both the AI connection and the local Remote Device are active, the AI can use Desktop Commander tools on your computer.
+Open **[mcp.desktopcommander.app](https://mcp.desktopcommander.app)** and follow the connection instructions for your AI client. Once both the AI connection and the local Remote Device are active, the AI can use Desktop Terminal Sync tools on your computer.
 
 ### 4. Keep the Remote Device running
 
@@ -64,10 +64,10 @@ The local process must be running for remote tool calls to reach your computer.
 The request path is:
 
 ```text
-AI client → Desktop Commander Remote MCP → Remote Device → local Desktop Commander MCP server
+AI client → Desktop Terminal Sync Remote MCP → Remote Device → local Desktop Terminal Sync server
 ```
 
-The Remote MCP service forwards tool calls to the connected device. The local Desktop Commander MCP server executes them and returns the result through the same connection.
+The Remote MCP service forwards tool calls to the connected device. The local Desktop Terminal Sync server executes them and returns the result through the same connection.
 
 ## Session persistence
 
@@ -260,7 +260,7 @@ These contributor commands are separate from the recommended end-user command, `
 - **Local execution:** tool calls execute on your computer under your user permissions.
 - **Explicit availability:** remote calls can reach the computer only while the Remote Device is running and connected.
 - **Authentication:** the device uses OAuth authentication to connect to the Remote MCP service.
-- **Local history:** the local Desktop Commander MCP server records tool-call history on the device. See [Local tool history and audit logs](../../README.md#local-tool-history-and-audit-logs) for storage locations and retention behavior.
+- **Local history:** the local Desktop Terminal Sync server records tool-call history on the device. See [Local tool history and audit logs](../../README.md#local-tool-history-and-audit-logs) for storage locations and retention behavior.
 - **Remote retention:** the Remote MCP service temporarily stores tool arguments and results in `mcp_remote_calls` so calls can be routed and completed. Terminal rows are automatically swept shortly after completion (eligible for deletion after one minute, with a one-hour creation-time backstop), so they are not kept as a long-term historical audit log.
 
-For general support, see the [Desktop Commander README](../../README.md) and [GitHub issues](https://github.com/wonderwhy-er/DesktopCommanderMCP/issues).
+For general support, see the [Desktop Terminal Sync README](../../README.md) and [GitHub issues](https://github.com/wonderwhy-er/DesktopCommanderMCP/issues).

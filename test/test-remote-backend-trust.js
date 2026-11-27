@@ -20,7 +20,7 @@ import {
 import { MCPDevice, logoutRemoteDevice } from '../dist/remote-device/device.js';
 import { runIfMain } from './helpers/run-if-main.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 async function runTests() {
     const supabase1Context = validateRemoteAuthContext(DEFAULT_REMOTE_SERVER_URL, SUPABASE1_ORIGIN);

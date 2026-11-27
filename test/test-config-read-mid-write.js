@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { createTestEnv } from './helpers/test-env.js';
 import { runIfMain } from './helpers/run-if-main.js';
 
-// #697: Desktop Commander 0.2.48 and older write config.json in place, so the
+// #697: Desktop Terminal Sync 0.2.48 and older write config.json in place, so the
 // file is empty from the moment the writer opens it until its content lands.
 // Measured with 0.2.46 serving tool calls beside the current build: empty for
 // up to ~260ms on Windows and ~60ms on macOS. A process reading config.json in

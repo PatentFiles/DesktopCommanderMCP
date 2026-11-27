@@ -1,7 +1,7 @@
 # Custom Stdio Server - How It Works
 
 ## Overview
-Desktop Commander uses a custom stdio transport layer that wraps standard console output (console.log, console.error, etc.) and raw stdout writes into valid JSON-RPC notification messages. This prevents crashes in MCP clients that expect all stdio communication to be JSON-RPC formatted.
+Desktop Terminal Sync uses a custom stdio transport layer that wraps standard console output (console.log, console.error, etc.) and raw stdout writes into valid JSON-RPC notification messages. This prevents crashes in MCP clients that expect all stdio communication to be JSON-RPC formatted.
 
 ## File Locations
 
@@ -297,4 +297,4 @@ The custom stdio server works by:
 4. **Replaying** buffered messages after initialization
 5. **Forwarding** all future logs as proper notifications
 
-This ensures Desktop Commander maintains full MCP protocol compliance while still allowing normal console logging throughout the codebase.
+This ensures Desktop Terminal Sync maintains full MCP protocol compliance while still allowing normal console logging throughout the codebase.

@@ -5,7 +5,7 @@ Branch renamed from `explore-stdio-server` to `do-not-show-notification-in-cline
 
 ## The Problem
 
-Desktop Commander currently uses `notifications/message` JSON-RPC method to send log messages:
+Desktop Terminal Sync currently uses `notifications/message` JSON-RPC method to send log messages:
 
 ```json
 {
@@ -154,7 +154,7 @@ if (clientName === 'vscode-cline' || clientName === 'cline') {
 
 ## Recommended Solution
 
-### **Hybrid Approach (Best for Desktop Commander)**
+### **Hybrid Approach (Best for Desktop Terminal Sync)**
 
 ```typescript
 class FilteredStdioServerTransport extends StdioServerTransport {

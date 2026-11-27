@@ -33,7 +33,7 @@ export default async function runTests() {
   const failures = [];
   try {
     fs.mkdirSync(path.join(dir, 'sub', 'deep'), { recursive: true });
-    // Real Office files, written by Desktop Commander's own Excel and DOCX handlers
+    // Real Office files, written by Desktop Terminal Sync's own Excel and DOCX handlers
     for (const rel of ['a.xlsx', 'sub/b.xlsx']) await writeFile(path.join(dir, rel), JSON.stringify([['needle']]));
     for (const rel of ['memo.docx', 'sub/deep/memo2.docx']) await writeFile(path.join(dir, rel), 'needle');
 

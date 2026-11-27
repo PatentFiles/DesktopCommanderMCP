@@ -176,9 +176,9 @@ export function stillLoadingError(
     const { error, needsRestart, support } = pending;
     if (!needsRestart) void pending.preload();
     if (!error) {
-        return `Can't ${action} ${file} yet: Desktop Commander is still loading its ${support} (it starts right after launch). Try again in a few seconds.`;
+        return `Can't ${action} ${file} yet: Desktop Terminal Sync is still loading its ${support} (it starts right after launch). Try again in a few seconds.`;
     }
     return needsRestart
-        ? `Can't ${action} ${file}: Desktop Commander couldn't load its ${support} (${error}). Restart Desktop Commander to load it again.`
-        : `Can't ${action} ${file}: Desktop Commander couldn't load its ${support} (${error}). It's loading it again; try again in a few seconds.`;
+        ? `Can't ${action} ${file}: Desktop Terminal Sync couldn't load its ${support} (${error}). Restart Desktop Terminal Sync to load it again.`
+        : `Can't ${action} ${file}: Desktop Terminal Sync couldn't load its ${support} (${error}). It's loading it again; try again in a few seconds.`;
 }

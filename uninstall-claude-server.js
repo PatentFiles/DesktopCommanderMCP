@@ -96,7 +96,7 @@ async function getNpmVersion() {
     }
 }
 
-// Get Desktop Commander version
+// Get Desktop Terminal Sync version
 const getVersion = async () => {
     try {
         if (process.env.npm_package_version) {
@@ -554,7 +554,7 @@ async function removeDesktopCommanderConfig() {
         if (!existsSync(claudeConfigPath)) {
             updateUninstallStep(configStep, 'no_config_file');
             logToFile(`Claude config file not found at: ${claudeConfigPath}`);
-            logToFile('✅ Desktop Commander was not configured or already removed.');
+            logToFile('✅ Desktop Terminal Sync was not configured or already removed.');
             await trackEvent('uninstall_config_not_found');
             return true;
         }
@@ -579,7 +579,7 @@ async function removeDesktopCommanderConfig() {
         if (!config.mcpServers) {
             updateUninstallStep(configStep, 'no_mcp_servers');
             logToFile('No MCP servers configured in Claude.');
-            logToFile('✅ Desktop Commander was not configured or already removed.');
+            logToFile('✅ Desktop Terminal Sync was not configured or already removed.');
             await trackEvent('uninstall_no_mcp_servers');
             return true;
         }
@@ -592,8 +592,8 @@ async function removeDesktopCommanderConfig() {
 
         if (serversToRemove.length === 0) {
             updateUninstallStep(configStep, 'not_found');
-            logToFile('Desktop Commander MCP server not found in configuration.');
-            logToFile('✅ Desktop Commander was not configured or already removed.');
+            logToFile('Desktop Terminal Sync server not found in configuration.');
+            logToFile('✅ Desktop Terminal Sync was not configured or already removed.');
             await trackEvent('uninstall_server_not_found');
             return true;
         }
@@ -618,7 +618,7 @@ async function removeDesktopCommanderConfig() {
             writeFileSync(claudeConfigPath, JSON.stringify(config, null, 2), 'utf8');
             updateUninstallStep(writeStep, 'completed');
             updateUninstallStep(configStep, 'completed');
-            logToFile('✅ Desktop Commander successfully removed from Claude configuration');
+            logToFile('✅ Desktop Terminal Sync successfully removed from Claude configuration');
             logToFile(`Configuration updated at: ${claudeConfigPath}`);
             await trackEvent('uninstall_config_updated');
         } catch (writeError) {
@@ -643,7 +643,7 @@ async function removeDesktopCommanderConfig() {
     } catch (error) {
         updateUninstallStep(configStep, 'failed', error);
         await trackEvent('uninstall_config_error', { error: error.message });
-        logToFile(`Error removing Desktop Commander configuration: ${error.message}`, true);
+        logToFile(`Error removing Desktop Terminal Sync configuration: ${error.message}`, true);
         
         // Try to restore from backup if we have one
         if (backupPath) {
@@ -675,7 +675,7 @@ export default async function uninstall() {
     const mainStep = addUninstallStep('main_uninstall');
 
     try {
-        logToFile('Starting Desktop Commander uninstallation...');
+        logToFile('Starting Desktop Terminal Sync uninstallation...');
         
         // Remove the server configuration from Claude
         const configRemoved = await removeDesktopCommanderConfig();
@@ -687,13 +687,13 @@ export default async function uninstall() {
             updateUninstallStep(mainStep, 'completed');
             
             const appVersion = await getVersion();
-            logToFile(`\n✅ Desktop Commander has been successfully uninstalled!`);
+            logToFile(`\n✅ Desktop Terminal Sync has been successfully uninstalled!`);
             logToFile('The MCP server has been removed from Claude\'s configuration.');
 
             logToFile('\nIf you want to reinstall later, you can run:');
             logToFile('npx @wonderwhy-er/desktop-commander@latest setup');
 
-            logToFile('\nThank you for using Desktop Commander! 👋\n');
+            logToFile('\nThank you for using Desktop Terminal Sync! 👋\n');
             
             // Send final tracking event
             await ensureTrackingCompleted('uninstall_complete');
@@ -703,7 +703,7 @@ export default async function uninstall() {
             updateUninstallStep(mainStep, 'failed_config_removal');
             
             logToFile('\n❌ Uninstallation completed with errors.');
-            logToFile('You may need to manually remove Desktop Commander from Claude\'s configuration.');
+            logToFile('You may need to manually remove Desktop Terminal Sync from Claude\'s configuration.');
             logToFile(`Configuration file location: ${claudeConfigPath}\n`);
 
             await ensureTrackingCompleted('uninstall_partial_failure');
@@ -721,7 +721,7 @@ export default async function uninstall() {
         
         logToFile(`Fatal error during uninstallation: ${error.message}`, true);
         logToFile('\n❌ Uninstallation failed.');
-        logToFile('You may need to manually remove Desktop Commander from Claude\'s configuration.');
+        logToFile('You may need to manually remove Desktop Terminal Sync from Claude\'s configuration.');
         logToFile(`Configuration file location: ${claudeConfigPath}\n`);
 
         return false;

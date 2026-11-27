@@ -32,7 +32,7 @@ import {
 import { runIfMain } from './helpers/run-if-main.js';
 
 // Keep telemetry from touching the network during the test.
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 // ---------------------------------------------------------------------------
 // Fakes that model realtime-js socket/channel semantics relevant to reconnection

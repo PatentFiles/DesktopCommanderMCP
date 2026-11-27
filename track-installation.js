@@ -2,7 +2,7 @@
 
 /**
  * Installation Source Tracking Script
- * Runs during npm install to detect how Desktop Commander was installed
+ * Runs during npm install to detect how Desktop Terminal Sync was installed
  * 
  * Debug logging can be enabled with:
  * - DEBUG=desktop-commander npm install
@@ -29,19 +29,19 @@ const DEBUG_ENABLED = process.env.DEBUG === 'desktop-commander' ||
 
 const debug = (...args) => {
     if (DEBUG_ENABLED) {
-        console.log('[Desktop Commander Debug]', ...args);
+        console.log('[Desktop Terminal Sync Debug]', ...args);
     }
 };
 
 const log = (...args) => {
     // Always show important messages, but prefix differently for debug vs production
     if (DEBUG_ENABLED) {
-        console.log('[Desktop Commander]', ...args);
+        console.log('[Desktop Terminal Sync]', ...args);
     }
 };
 
 /**
- * Get the client ID from the Desktop Commander config file, or generate a new one
+ * Get the client ID from the Desktop Terminal Sync config file, or generate a new one
  */
 async function getClientId() {
     try {

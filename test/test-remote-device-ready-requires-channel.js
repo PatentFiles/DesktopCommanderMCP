@@ -35,7 +35,7 @@ import assert from 'node:assert';
 import { ChannelUnreachableError, RemoteChannel } from '../dist/remote-device/remote-channel.js';
 import { exitProcess } from '../dist/utils/exit-process.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 const DEVICE_ID = 'device-1';
 const USER = { id: 'user-1', email: 'tester@example.com' };

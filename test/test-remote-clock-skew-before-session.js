@@ -42,7 +42,7 @@ import http from 'node:http';
 import { observeServerDate } from '../dist/remote-device/remote-channel.js';
 import { exitProcess } from '../dist/utils/exit-process.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 /** Well past CLOCK_SKEW_CORRECTION_THRESHOLD_MS (5 min), so a correction is due. */
 const SERVER_AHEAD_MS = 3 * 60 * 60 * 1000;

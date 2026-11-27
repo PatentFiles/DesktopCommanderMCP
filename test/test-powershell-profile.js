@@ -1,6 +1,6 @@
 /**
  * The PowerShell helper starts with the user's profile, as the PowerShell a
- * command runs in does (Desktop Commander starts it without -NoProfile), and
+ * command runs in does (Desktop Terminal Sync starts it without -NoProfile), and
  * a profile can't spoil its answers:
  *   - a profile's alias comes before a function: with Set-Alias net net.exe in
  *     the profile on Windows, or Set-Alias net /usr/bin/net on other systems,

@@ -1,10 +1,10 @@
 /**
  * Tests that the user's ripgrep config file (RIPGREP_CONFIG_PATH) does not
- * change Desktop Commander's searches. start_search builds ripgrep's complete
+ * change Desktop Terminal Sync's searches. start_search builds ripgrep's complete
  * argument list from its own arguments (ignoreCase, includeHidden,
  * filePattern, maxResults...), so flags from that file would silently change
  * which files are searched, how many matches each gives, and the output
- * Desktop Commander parses.
+ * Desktop Terminal Sync parses.
  */
 
 import assert from 'assert';

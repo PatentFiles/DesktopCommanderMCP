@@ -105,7 +105,7 @@ export class FilteredStdioServerTransport extends StdioServerTransport {
         this.clientName.includes('vscode') ||
         this.clientName === 'claude-dev') {
       this.disableNotifications = true;
-      process.stderr.write(`[INFO] Desktop Commander: Notifications disabled for ${clientName}\n`);
+      process.stderr.write(`[INFO] Desktop Terminal Sync: Notifications disabled for ${clientName}\n`);
     }
   }
 

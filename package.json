@@ -1,7 +1,7 @@
 {
   "name": "desktop-terminal-sync",
   "version": "0.3.5-alpha.0",
-  "description": "Desktop Terminal Sync: local MCP terminal, PowerShell, file tools and GitHub CLI",
+  "description": "Desktop Terminal Sync: private, local MCP terminal and file operations for AI clients",
   "mcpName": "io.github.PatentFiles/desktop-terminal-sync",
   "license": "MIT",
   "author": "Eduards Ruzga",
@@ -24,7 +24,7 @@
     "testemonials"
   ],
   "scripts": {
-    "postinstall": "node -e \"console.log('Desktop Terminal Sync ready')\"",
+    "postinstall": "node -e \"console.log('Desktop Terminal Sync dependencies installed')\"",
     "open-chat": "open -n /Applications/Claude.app",
     "device:install": "cd src/remote-device && npm install",
     "device:start": "tsx src/remote-device/device.ts",

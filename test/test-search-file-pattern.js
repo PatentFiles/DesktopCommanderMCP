@@ -194,7 +194,7 @@ export default async function runTests() {
     for (const stem of STEMS) {
       const [txt, xlsx, docx] = extensionsOf(stem).map((ext) => path.join(TEST_DIR, ...`${stem}.${ext}`.split('/')));
       await fs.writeFile(txt, 'needle\n');
-      // Real Office files, written by Desktop Commander's own Excel and DOCX handlers
+      // Real Office files, written by Desktop Terminal Sync's own Excel and DOCX handlers
       await writeFile(xlsx, JSON.stringify([['needle report']]));
       await writeFile(docx, 'needle report');
     }

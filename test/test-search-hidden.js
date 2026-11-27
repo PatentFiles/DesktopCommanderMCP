@@ -212,7 +212,7 @@ export default async function runTests() {
     for (const rel of [...VISIBLE_TEXT, ...HIDDEN_TEXT, ...HIDDEN_DOTFILES]) {
       await fs.writeFile(path.join(TEST_DIR, rel), 'needle\n');
     }
-    // Real Office files, written by Desktop Commander's own Excel and DOCX handlers
+    // Real Office files, written by Desktop Terminal Sync's own Excel and DOCX handlers
     for (const rel of [...VISIBLE_OFFICE, ...HIDDEN_OFFICE]) {
       const content = rel.endsWith('.xlsx') ? JSON.stringify([['needle report']]) : 'needle report';
       await writeFile(path.join(TEST_DIR, rel), content);

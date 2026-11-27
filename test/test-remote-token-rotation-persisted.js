@@ -41,7 +41,7 @@ import path from 'node:path';
 import { MCPDevice } from '../dist/remote-device/device.js';
 import { exitProcess } from '../dist/utils/exit-process.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 const DEVICE_ID = 'device-1';
 

@@ -1,8 +1,8 @@
 {
   "name": "desktop-commander",
-  "displayName": "Desktop Commander",
+  "displayName": "Desktop Terminal Sync",
   "owner": {
-    "name": "Desktop Commander",
+    "name": "Desktop Terminal Sync",
     "email": "es@desktopcommander.app"
   },
   "metadata": {
@@ -12,7 +12,7 @@
   "plugins": [
     {
       "name": "desktop-commander",
-      "displayName": "Desktop Commander",
+      "displayName": "Desktop Terminal Sync",
       "source": "./plugins/claude",
       "description": "MCP server for terminal shell commands, process management, and file operations across text, coding, PDF, DOCX, Excel, images, and structured data"
     }

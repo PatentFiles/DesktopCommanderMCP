@@ -16,7 +16,7 @@
  * preview frame per way out, puts them into the file preview's own document
  * as the server serves it (getFilePreviewResourceText), and loads that in
  * headless Chrome with no policy from a host, as in a host that sets none. So
- * a policy counts wherever Desktop Commander sets it: on the preview frame or
+ * a policy counts wherever Desktop Terminal Sync sets it: on the preview frame or
  * on its own document, which the srcdoc frames inherit. A local HTTP server on
  * another port stands for "another website" and records every request it gets.
  *
@@ -32,7 +32,7 @@
  * click, and a Content-Security-Policy does not stop it.
  *
  * Every preview frame must load, so a preview that never rendered cannot pass.
- * Chrome is found the way the PDF render finds it (Desktop Commander's cached
+ * Chrome is found the way the PDF render finds it (Desktop Terminal Sync's cached
  * Chrome for Testing, else the system's), without installing one; the test is
  * skipped when there is none.
  */

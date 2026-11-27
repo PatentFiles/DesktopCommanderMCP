@@ -1,5 +1,5 @@
 /**
- * The shells Desktop Commander offers (the config editor's choices, from
+ * The shells Desktop Terminal Sync offers (the config editor's choices, from
  * detectAvailableShells()) are command shells only.
  *
  * /etc/shells lists login shells, and on Linux installing tmux or screen adds

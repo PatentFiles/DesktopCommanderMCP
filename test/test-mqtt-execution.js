@@ -10,7 +10,7 @@ import { syncBuiltinESMExports } from 'node:module';
 import { waitUntil } from './helpers/wait.js';
 import { doorbell, makeChannel } from './helpers/remote-calls-table.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 const { RemoteChannel } = await import('../dist/remote-device/remote-channel.js');
 const { rolloutManager } = await import('../dist/remote-device/rollouts.js');
 const { configManager } = await import('../dist/config-manager.js');
@@ -194,7 +194,7 @@ test('restart telemetry: a planned restart is reported, and so is the start that
     });
     syncBuiltinESMExports();
     configManager.getValue = async key => key === 'telemetryEnabled' ? true : undefined;
-    process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '0';
+    process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '0';
     const sent = name => events.filter(event => event.name === name).map(event => event.params);
     try {
         setMqttTransport(true);
@@ -214,7 +214,7 @@ test('restart telemetry: a planned restart is reported, and so is the start that
         await waitUntil(() => sent('remote_channel_mqtt_restart_succeeded').length === 1, 5_000, 'the recovery is reported');
         assert.equal(sent('remote_channel_mqtt_restart_succeeded')[0].attempts, 1);
     } finally {
-        process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+        process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
         https.request = originalRequest;
         syncBuiltinESMExports();
     }

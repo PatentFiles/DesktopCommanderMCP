@@ -3,7 +3,7 @@
 //
 // install-docker.sh and install-docker.ps1 keep /usr in the volume dc-system. To
 // update it, they stop the containers that use it and then copy the new image's
-// /usr into it, after deleting Desktop Commander's folder there. They ignored a
+// /usr into it, after deleting Desktop Terminal Sync's folder there. They ignored a
 // failing `docker ps` or `docker stop` and copied anyway, so the copy could run
 // while a container still used the volume.
 //

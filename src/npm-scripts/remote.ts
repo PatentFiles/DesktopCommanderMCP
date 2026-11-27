@@ -23,7 +23,7 @@ function printRemoteHeader() {
 export async function runRemote() {
     startTerminalTimestamps();
     if (process.argv.includes('--help') || process.argv.includes('-h')) {
-        console.log(`Desktop Commander Remote MCP device
+        console.log(`Desktop Terminal Sync Remote MCP device
 
 Usage:
   desktop-commander remote [options]

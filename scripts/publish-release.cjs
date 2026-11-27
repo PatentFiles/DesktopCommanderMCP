@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Desktop Commander - Release Trigger Script
+ * Desktop Terminal Sync - Release Trigger Script
  *
  * Publishing is done by CI (.github/workflows/release.yml), triggered by
  * pushing a version tag. This script prepares and fires that trigger:
@@ -379,7 +379,7 @@ async function publishRelease() {
 
     console.log('');
     console.log('╔══════════════════════════════════════════════════════════╗');
-    console.log('║         Desktop Commander Release Publisher             ║');
+    console.log('║         Desktop Terminal Sync Release Publisher             ║');
     console.log('╚══════════════════════════════════════════════════════════╝');
     console.log('');
     printStep(`Current version: ${currentVersion}`);

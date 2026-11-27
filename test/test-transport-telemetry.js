@@ -10,7 +10,7 @@ import { configManager } from '../dist/config-manager.js';
 import { observeTransport } from '../dist/remote-device/transport-telemetry.js';
 import { capture } from '../dist/utils/capture.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 const received = (callId, payload) => observeTransport({ stage: 'received_from_backend', callId, payload, deviceId: 'device-1',
     userId: 'user-1', transport: 'broadcast' });
 const receipt = received('call-1');
@@ -74,10 +74,10 @@ for (const userId of [undefined, '', ' ', 'x'.repeat(129)]) {
 const originalRequest = https.request;
 const originalGetValue = configManager.getValue;
 const originalGetOrCreateClientId = configManager.getOrCreateClientId;
-const originalDisableTelemetry = process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY;
+const originalDisableTelemetry = process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY;
 const sent = [];
 try {
-    process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '0';
+    process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '0';
     configManager.getValue = async key => key === 'telemetryEnabled' ? true : undefined;
     configManager.getOrCreateClientId = async () => 'installation-1';
     https.request = (options, onResponse) => {
@@ -160,6 +160,6 @@ try {
     syncBuiltinESMExports();
     configManager.getValue = originalGetValue;
     configManager.getOrCreateClientId = originalGetOrCreateClientId;
-    process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = originalDisableTelemetry;
+    process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = originalDisableTelemetry;
 }
 console.log('PASS transport observations: required wire fields and identity retained; ordinary capture unchanged');

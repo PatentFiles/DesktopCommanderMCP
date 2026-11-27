@@ -88,7 +88,7 @@ test('actual late relative-PATH endpoint is not the captured native launch alias
   `;
   try {
     const child=spawnSync(process.execPath,['--input-type=module','-e',script],{
-      encoding:'utf8',timeout:15000,env:{...process.env,DESKTOP_COMMANDER_DISABLE_TELEMETRY:'1'},
+      encoding:'utf8',timeout:15000,env:{...process.env,DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY:'1'},
     });
     assert.equal(child.status,0,child.stderr||child.stdout);
   } finally { fs.rmSync(root,{recursive:true,force:true}); }

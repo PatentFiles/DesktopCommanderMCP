@@ -1,4 +1,4 @@
-// write_pdf in Desktop Commander's Docker image.
+// write_pdf in Desktop Terminal Sync's Docker image.
 //
 // Builds the image from this checkout's Dockerfile and starts the server in it
 // the way the Docker install does (`docker run -i --rm`, with Docker's default
@@ -21,7 +21,7 @@ import { buildImage, checkWritePdf, docker, dockerQuietly } from '../helpers/doc
 // The image, containers and volume are named after this test and its process, so they can be removed by name
 const NAME = `dc-test-write-pdf-in-image-${process.pid}`;
 const HOME_VOLUME = `${NAME}-home`;
-// Where an older image's write_pdf left the Chrome it downloaded, in Desktop Commander's Puppeteer cache
+// Where an older image's write_pdf left the Chrome it downloaded, in Desktop Terminal Sync's Puppeteer cache
 const CACHED_CHROME_DIR = '/root/.claude-server-commander/puppeteer-cache/chrome/linux-156.0.8078.47/chrome-linux64';
 
 /**

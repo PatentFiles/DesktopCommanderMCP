@@ -9,7 +9,7 @@ meta:
     - filesystem
     - terminal
 about:
-  title: Desktop Commander
+  title: Desktop Terminal Sync
   description: Search, update, manage files and run terminal commands with AI. Configurable filesystem access and network permissions.
   icon: https://avatars.githubusercontent.com/u/182288589?s=200&v=4
 source:
@@ -30,7 +30,7 @@ run:
     - name: NETWORK_TIMEOUT
       value: '{{desktop-commander.network_settings.timeout_seconds}}'
 config:
-  description: Configure filesystem access and network permissions for Desktop Commander
+  description: Configure filesystem access and network permissions for Desktop Terminal Sync
   parameters:
     type: object
     properties:
@@ -39,7 +39,7 @@ config:
         items:
           type: string
         title: Allowed Filesystem Paths
-        description: List of directories that Desktop Commander can access. Empty array allows full filesystem access.
+        description: List of directories that Desktop Terminal Sync can access. Empty array allows full filesystem access.
         default:
           - /Users/username/Desktop
           - /Users/username/Documents
@@ -70,7 +70,7 @@ config:
           enable_telemetry:
             type: boolean
             title: Enable Telemetry
-            description: Allow Desktop Commander to collect anonymous usage statistics
+            description: Allow Desktop Terminal Sync to collect anonymous usage statistics
             default: true
           file_size_limit_mb:
             type: integer

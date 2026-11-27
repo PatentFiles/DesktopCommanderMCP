@@ -1,5 +1,5 @@
 /**
- * The process tools' structuredContent is for Desktop Commander's own code and
+ * The process tools' structuredContent is for Desktop Terminal Sync's own code and
  * tests (src/utils/internal-facts.ts drops it before a client sees it). Every
  * successful answer must carry the facts that apply to it, as the other paths
  * do: a node:local session's start, each script it runs, and input sent

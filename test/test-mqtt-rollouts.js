@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 const { RemoteChannel } = await import('../dist/remote-device/remote-channel.js');
 const { rolloutManager } = await import('../dist/remote-device/rollouts.js');
 const { VERSION } = await import('../dist/version.js');

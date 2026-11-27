@@ -39,7 +39,7 @@ function chromeExecutable(buildDir) {
 }
 
 /**
- * Puts two Chrome for Testing builds (empty stand-ins) in Desktop Commander's
+ * Puts two Chrome for Testing builds (empty stand-ins) in Desktop Terminal Sync's
  * Puppeteer cache. The server's Chrome warm-up picks the newer one and removes
  * the older one, and never downloads Chrome.
  */
@@ -77,7 +77,7 @@ function seedChromeCache() {
  * - release(): lets a held package load
  * - close()
  *
- * It writes to Desktop Commander's folder in the home, so it runs only in a test home.
+ * It writes to Desktop Terminal Sync's folder in the home, so it runs only in a test home.
  */
 export async function startServerRecordingModules({ holdPackage, failPackageOnce, failOnly } = {}) {
   if (!isTestHome()) {

@@ -315,7 +315,7 @@ async function run() {
     }
   });
 
-  // config.json removed while Desktop Commander runs (e.g. a damaged one moved aside by
+  // config.json removed while Desktop Terminal Sync runs (e.g. a damaged one moved aside by
   // hand): the next write must not recreate it with nothing but the value it sets
   await check('config.json removed while running: the next write creates it with the defaults, blocked commands included', async () => {
     const home = homeWithConfig(JSON.stringify({ pendingWelcomeOnboarding: false, welcomeOnboardingEligible: false }, null, 2));

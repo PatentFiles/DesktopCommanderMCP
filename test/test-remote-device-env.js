@@ -1,10 +1,10 @@
 /**
- * The device (`desktop-commander remote`) starts a local Desktop Commander that
+ * The device (`desktop-commander remote`) starts a local Desktop Terminal Sync that
  * runs every tool call. That server must get the device's environment, the
- * same one a Desktop Commander started directly would get: what the user set
+ * same one a Desktop Terminal Sync started directly would get: what the user set
  * for the device (a systemd unit's Environment=, a container's env) reaches the
  * tools and the commands they start. Starting it with only the MCP SDK's
- * minimal environment lost, among others, DESKTOP_COMMANDER_DISABLE_TELEMETRY
+ * minimal environment lost, among others, DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY
  * (the device honored it, the server sending the telemetry did not), PATHEXT
  * and ComSpec on Windows, and the container detection variables.
  *

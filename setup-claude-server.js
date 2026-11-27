@@ -613,7 +613,7 @@ async function restartClaude() {
                 logToFile('\nTo use the server restart Claude if it\'s currently running\n');
             }
             
-            logToFile("\n✅ Installation successfully completed! Thank you for using Desktop Commander!\n");
+            logToFile("\n✅ Installation successfully completed! Thank you for using Desktop Terminal Sync!\n");
             logToFile('\nThe server is available as "desktop-commander" in Claude\'s MCP server list');
             
             logToFile("Future updates will install automatically — no need to run this setup again.\n\n");
@@ -658,7 +658,7 @@ export default async function setup() {
     const setupStep = addSetupStep('main_setup');
     const debugMode = isDebugMode();
 
-    // Print ASCII art for DESKTOP COMMANDER
+    // Print ASCII art for DESKTOP TERMINAL SYNC
     console.log('\n');
     console.log('██████╗ ███████╗███████╗██╗  ██╗████████╗ ██████╗ ██████╗     ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ █████╗ ███╗   ██╗██████╗ ███████╗██████╗ ');
     console.log('██╔══██╗██╔════╝██╔════╝██║ ██╔╝╚══██╔══╝██╔═══██╗██╔══██╗   ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝██╔══██╗');
@@ -884,7 +884,7 @@ export default async function setup() {
             throw new Error(`Failed to update config: ${updateError.message}`);
         }
         const appVersion = await getVersion()
-        logToFile(`✅ Desktop Commander MCP v${appVersion} successfully added to Claude’s configuration.`);
+        logToFile(`✅ Desktop Terminal Sync v${appVersion} successfully added to Claude’s configuration.`);
         logToFile(`Configuration location: ${claudeConfigPath}`);
 
         if (debugMode) {

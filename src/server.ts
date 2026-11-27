@@ -270,7 +270,7 @@ server.setRequestHandler(InitializeRequestSchema, async (request: InitializeRequ
                 logging: {},
             },
             serverInfo: {
-                name: "desktop-commander",
+                name: "desktop-terminal-sync",
                 version: VERSION,
             },
             instructions: SERVER_INSTRUCTIONS,

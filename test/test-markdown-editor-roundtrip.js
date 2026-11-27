@@ -328,7 +328,7 @@ async function testEmojiPrefixedSoftBreaksRestored() {
   const input =
     '🔗 **Live tool:** desktopcommander.app/best-value-ai/\n' +
     '📖 **Article:** [Local LLMs Beat Cloud](https://example.com/x)\n' +
-    '🏠 **Supported by:** [Desktop Commander](https://desktopcommander.app)\n';
+    '🏠 **Supported by:** [Desktop Terminal Sync](https://desktopcommander.app)\n';
   const output = roundTrip(input);
   assert.strictEqual(
     output,

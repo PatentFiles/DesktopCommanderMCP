@@ -1,5 +1,5 @@
 /**
- * A program Desktop Commander starts by name that isn't on PATH must not be
+ * A program Desktop Terminal Sync starts by name that isn't on PATH must not be
  * started by its bare name: Windows looks a bare name up in the working folder
  * first, so a cmd.exe, powershell.exe or tasklist.exe there would run instead.
  * The call answers "<name> was not found on PATH" instead (start_process with

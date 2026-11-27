@@ -230,7 +230,7 @@ export function startDeviceLog(options: DeviceLogOptions = {}): () => void {
             log.record(args);
         };
     }
-    log.write(`Remote started (Desktop Commander ${VERSION}, Node ${process.versions.node}, ${process.platform})`);
+    log.write(`Remote started (Desktop Terminal Sync ${VERSION}, Node ${process.versions.node}, ${process.platform})`);
     return () => {
         for (const [method, original] of originals) console[method] = original;
     };

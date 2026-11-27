@@ -25,7 +25,7 @@ import { callToolOnceLoaded } from '../helpers/heavy-packages.js';
 import { exitProcess } from '../../dist/utils/exit-process.js';
 
 const WAIT_LIMIT_MS = 30_000;
-/** Chrome profile folders: Desktop Commander's own, or one Puppeteer creates itself */
+/** Chrome profile folders: Desktop Terminal Sync's own, or one Puppeteer creates itself */
 const PROFILE_PREFIXES = ['desktop-commander-chrome-profile-', 'puppeteer_dev_chrome_profile-'];
 
 const T0 = Date.now();

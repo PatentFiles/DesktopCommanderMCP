@@ -1,9 +1,9 @@
 /**
  * The uninstall script (uninstall-claude-server.js, `npm run remove`, and the
- * `remove` bin, dist/uninstall-claude-server.js): it takes Desktop Commander out
+ * `remove` bin, dist/uninstall-claude-server.js): it takes Desktop Terminal Sync out
  * of Claude's config for each platform, keeps the rest and a backup, says so when
  * there's nothing to remove, puts the backup back when it can't write the config,
- * and exits 1 then. It sends telemetry only when Desktop Commander's config allows
+ * and exits 1 then. It sends telemetry only when Desktop Terminal Sync's config allows
  * it, with that config's client id. Through helpers/install-script.js: a temporary
  * home and stand-ins.
  */
@@ -28,7 +28,7 @@ const backups = (run, platform) => Object.keys(run.home)
   .filter((file) => file.startsWith(`${CLAUDE_CONFIG[platform]}.backup.`));
 const said = (run, text) => `${run.stdout}${run.stderr}`.includes(text);
 const uninstall = (options = {}) => runInstallScript(SCRIPT, { platform: 'linux', ...options });
-/** A home with Claude's config (text, or an object), and Desktop Commander's own config when given */
+/** A home with Claude's config (text, or an object), and Desktop Terminal Sync's own config when given */
 const homeWith = ({ claude, own, platform = 'linux' }) => (home) => {
   const text = typeof claude === 'string' ? claude : JSON.stringify(claude);
   if (claude !== undefined) put(home, CLAUDE_CONFIG[platform], text);
@@ -47,7 +47,7 @@ async function eachPlatform() {
     assert.ok(said(run, 'successfully uninstalled') && said(run, 'Telemetry disabled'), run.stdout);
     assert.deepStrictEqual(run.posts, [], 'no telemetry without its config allowing it');
   }
-  console.log('✓ each platform: Desktop Commander removed from Claude\'s config, the rest kept, a backup made');
+  console.log('✓ each platform: Desktop Terminal Sync removed from Claude\'s config, the rest kept, a backup made');
 }
 
 /** Checks each already-absent configuration remains a successful, observable no-op. */

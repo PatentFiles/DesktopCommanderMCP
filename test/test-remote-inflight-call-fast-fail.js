@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Regression test: when the local Desktop Commander child dies mid tool call,
+ * Regression test: when the local Desktop Terminal Sync child dies mid tool call,
  * the in-flight call must fail immediately — not after the MCP SDK's 60 second
  * default request timeout.
  *
@@ -41,7 +41,7 @@ import { fileURLToPath } from 'node:url';
 import { DesktopCommanderIntegration } from '../dist/remote-device/desktop-commander-integration.js';
 import { exitProcess } from '../dist/utils/exit-process.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FIXTURE = path.join(__dirname, 'fixtures', 'dying-mcp-server.js');

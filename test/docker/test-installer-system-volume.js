@@ -2,13 +2,13 @@
 //
 // install-docker.sh and install-docker.ps1 keep the container's /usr in the
 // volume dc-system, so the tools the AI installs survive restarts. That
-// volume also hid a newer image's /usr: its Desktop Commander and its
+// volume also hid a newer image's /usr: its Desktop Terminal Sync and its
 // Chromium. After pulling a new image, the installers copy its /usr into the
 // volume (update_system_volume, Update-SystemVolume).
 //
 // The test builds two images from this checkout. The older one stands for an
 // image from before Chromium was added: the Dockerfile without its Chromium
-// line, and a file only it has in Desktop Commander's folder. The new one is
+// line, and a file only it has in Desktop Terminal Sync's folder. The new one is
 // the checkout's own, with a file only it has. Like an existing user, the
 // older image runs with the installers' four volumes, installs jq with apk and
 // a small tool with npm install -g, and writes a file in the home, and a
@@ -21,7 +21,7 @@
 // Checks: both installers mount the same volumes; the update step works and
 // stops the running container; a second update leaves the volume as the first
 // did; write_pdf works; jq, the npm tool and the home file are kept; the volume
-// has the new image's Desktop Commander and not the older one's.
+// has the new image's Desktop Terminal Sync and not the older one's.
 //
 // It needs Docker and network (apk), so it sits outside the folders the test runners read.
 // On Windows install-docker.sh runs in Git Bash.
@@ -97,7 +97,7 @@ try {
   const systemVolume = volumes.find(({ folder }) => folder === '/usr')?.name;
   if (!systemVolume) throw new Error('install-docker.sh mounts no volume on /usr');
 
-  // Each image gets a file only it has in Desktop Commander's folder (the Dockerfile's WORKDIR)
+  // Each image gets a file only it has in Desktop Terminal Sync's folder (the Dockerfile's WORKDIR)
   const dockerfile = readInstaller('Dockerfile');
   const withoutChromium = dockerfile.replace(/^RUN apk add .*chromium.*\r?\n/m, '');
   if (withoutChromium === dockerfile) throw new Error('the Dockerfile has no "RUN apk add … chromium" line to leave out');
@@ -120,7 +120,7 @@ try {
   ].join(' && ')));
   check('the older image has them', seeded.jq.startsWith('jq-') && seeded['npm-tool'] === 'works' && seeded['home-file'] === 'kept' && seeded['old-dc'] === 'yes',
     JSON.stringify(seeded));
-  // Still running when the update starts, as the AI app's Desktop Commander can be
+  // Still running when the update starts, as the AI app's Desktop Terminal Sync can be
   docker(['run', '--detach', '--rm', '--init', '--name', RUNNING, ...volumeArgs, '--entrypoint', 'sleep', OLD_IMAGE, '600']);
 
   const second = process.platform === 'win32' ? 'install-docker.ps1' : 'install-docker.sh';
@@ -139,7 +139,7 @@ try {
   check('jq is kept', kept.jq.startsWith('jq-'), kept.jq);
   check('the npm tool is kept', kept['npm-tool'] === 'works', kept['npm-tool']);
   check('the home file is kept', kept['home-file'] === 'kept', kept['home-file']);
-  check("the volume has the new image's Desktop Commander", kept['new-dc'] === 'yes' && kept['old-dc'] === 'no',
+  check("the volume has the new image's Desktop Terminal Sync", kept['new-dc'] === 'yes' && kept['old-dc'] === 'no',
     `new image's file ${kept['new-dc']}, older image's file ${kept['old-dc']}`);
   results.push(await checkWritePdf(NEW_IMAGE, `${NAME}-write-pdf`, volumeArgs));
   if (results.includes(false)) process.exitCode = 1;

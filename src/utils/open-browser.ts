@@ -39,7 +39,7 @@ export async function openBrowser(url: string): Promise<void> {
 }
 
 /**
- * Open the Desktop Commander welcome page
+ * Open the Desktop Terminal Sync welcome page
  */
 export async function openWelcomePage(clientName?: string): Promise<void> {
   // utm_source is auto-captured by the welcome page's PostHog (and GA4), so

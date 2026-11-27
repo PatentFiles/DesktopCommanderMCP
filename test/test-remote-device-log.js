@@ -114,13 +114,13 @@ async function runTests() {
             log.record(['⏳ Subscribing to tool call channel...']);
             log.record([`👋 Presence tracked (device ${DEVICE_ID} visible as online)`]);
             log.record([`[DEBUG] Creating channel: user:${DEVICE_ID}`]);
-            log.record([` - ⏳ Connecting to Local Desktop Commander MCP using: ${process.execPath} ${path.join(os.homedir(), 'dist', 'index.js')}`]);
+            log.record([` - ⏳ Connecting to Local Desktop Terminal Sync using: ${process.execPath} ${path.join(os.homedir(), 'dist', 'index.js')}`]);
             const text = readLog(dir);
             assert.match(text, /Z {2}│ Return to ChatGPT or Claude and continue your conversation\.\n/);
             assert.match(text, /Z {2}Subscribing to tool call channel\.\.\.\n/);
             assert.match(text, /Z {2}Presence tracked \(device <id> visible as online\)\n/);
             assert.match(text, /Z {2}Creating channel: user:<id>\n/);
-            assert.match(text, /Z {2}Connecting to Local Desktop Commander MCP using: /);
+            assert.match(text, /Z {2}Connecting to Local Desktop Terminal Sync using: /);
             assertAbsent(text, DEVICE_ID, 'the device id');
             assertAbsent(text, os.homedir(), 'the home folder');
         });

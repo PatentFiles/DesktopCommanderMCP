@@ -73,7 +73,7 @@ async function runAbTest({ experiments, config = {}, features }) {
         HOME: home,
         USERPROFILE: home,
         DC_FLAG_URL: 'http://127.0.0.1:9/flags.json',
-        DESKTOP_COMMANDER_DISABLE_TELEMETRY: '1',
+        DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY: '1',
         FLAGS_MODULE: distModule('utils/feature-flags.js'),
         AB_MODULE: distModule('utils/ab-test.js'),
         CONFIG_MODULE: distModule('config-manager.js'),

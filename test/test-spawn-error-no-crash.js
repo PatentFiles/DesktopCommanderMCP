@@ -23,7 +23,7 @@ import assert from 'node:assert';
 import { terminalManager } from '../dist/terminal-manager.js';
 import { exitProcess } from '../dist/utils/exit-process.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 // A path that cannot resolve on any platform we support.
 const BOGUS_SHELL = process.platform === 'win32'

@@ -1,31 +1,31 @@
 # Frequently Asked Questions (FAQ)
 
-This document provides answers to the most commonly asked questions about Claude Desktop Commander (also known as ClaudeComputerCommander). If you can't find an answer to your question here, please join our [Discord server](https://discord.gg/kQ27sNnZr7) for additional support or [open a GitHub issue](https://github.com/wonderwhy-er/ClaudeComputerCommander/issues/new).
+This document provides answers to the most commonly asked questions about Claude Desktop Terminal Sync (also known as ClaudeComputerCommander). If you can't find an answer to your question here, please join our [Discord server](https://discord.gg/kQ27sNnZr7) for additional support or [open a GitHub issue](https://github.com/wonderwhy-er/ClaudeComputerCommander/issues/new).
 
 > **Note**: For a more user-friendly version of this FAQ, visit our [website FAQ section](https://desktopcommander.app#faq).
 
 ## Table of Contents
 
 - [General Information](#general-information)
-  - [What is Claude Desktop Commander?](#what-is-claude-desktop-commander)
+  - [What is Claude Desktop Terminal Sync?](#what-is-claude-desktop-commander)
   - [How does it differ from coding tools like Cursor or Windsurf?](#how-does-it-differ-from-coding-tools-like-cursor-or-windsurf)
   - [What is an MCP?](#what-is-an-mcp)
   - [Is this an official Anthropic product?](#is-this-an-official-anthropic-product)
 
 - [Cost & Value](#cost--value)
-  - [How much does it cost to use Claude Desktop Commander?](#how-much-does-it-cost-to-use-claude-desktop-commander)
+  - [How much does it cost to use Claude Desktop Terminal Sync?](#how-much-does-it-cost-to-use-claude-desktop-commander)
   - [How does the pricing compare to Claude Code or other AI coding tools?](#how-does-the-pricing-compare-to-claude-code-or-other-ai-coding-tools)
   - [Do I need API credits to use this tool?](#do-i-need-api-credits-to-use-this-tool)
 
 - [Installation & Setup](#installation--setup)
-  - [What are the prerequisites for using Claude Desktop Commander?](#what-are-the-prerequisites-for-using-claude-desktop-commander)
-  - [How do I install Claude Desktop Commander?](#how-do-i-install-claude-desktop-commander)
+  - [What are the prerequisites for using Claude Desktop Terminal Sync?](#what-are-the-prerequisites-for-using-claude-desktop-commander)
+  - [How do I install Claude Desktop Terminal Sync?](#how-do-i-install-claude-desktop-commander)
   - [How do I update to the latest version?](#how-do-i-update-to-the-latest-version)
   - [Which operating systems does it support?](#which-operating-systems-does-it-support)
-  - [How do I get started after installing Desktop Commander?](#how-do-i-get-started-after-installing-desktop-commander)
+  - [How do I get started after installing Desktop Terminal Sync?](#how-do-i-get-started-after-installing-desktop-commander)
 
 - [Features & Capabilities](#features--capabilities)
-  - [What can I do with Claude Desktop Commander?](#what-can-i-do-with-claude-desktop-commander)
+  - [What can I do with Claude Desktop Terminal Sync?](#what-can-i-do-with-claude-desktop-commander)
   - [Can Claude analyze my CSV/Excel files directly?](#can-claude-analyze-my-csvexcel-files-directly)
   - [Can Claude connect to remote servers?](#can-claude-connect-to-remote-servers)
   - [Does Claude save temporary files when running code?](#does-claude-save-temporary-files-when-running-code)
@@ -35,10 +35,10 @@ This document provides answers to the most commonly asked questions about Claude
   - [Can it help me understand complex codebases?](#can-it-help-me-understand-complex-codebases)
   - [How does it handle long-running commands?](#how-does-it-handle-long-running-commands)
   - [Can I use it for non-coding tasks?](#can-i-use-it-for-non-coding-tasks)
-  - [How does Desktop Commander collect feedback and usage data?](#how-does-desktop-commander-collect-feedback-and-usage-data)
+  - [How does Desktop Terminal Sync collect feedback and usage data?](#how-does-desktop-commander-collect-feedback-and-usage-data)
   - [Can I disable the new usage analytics?](#can-i-disable-the-new-usage-analytics)
   - [How do I stop seeing feedback prompts?](#how-do-i-stop-seeing-feedback-prompts)
-  - [Does Desktop Commander work in Docker containers?](#does-desktop-commander-work-in-docker-containers)
+  - [Does Desktop Terminal Sync work in Docker containers?](#does-desktop-commander-work-in-docker-containers)
 
 - [Security & Permissions](#security--permissions)
   - [Is it safe to give Claude access to my file system?](#is-it-safe-to-give-claude-access-to-my-file-system)
@@ -68,19 +68,19 @@ This document provides answers to the most commonly asked questions about Claude
 
 ## General Information
 
-### What is Claude Desktop Commander?
+### What is Claude Desktop Terminal Sync?
 
-Claude Desktop Commander is an MCP (Model Context Protocol) tool that allows Claude Desktop to access and control your computer's file system and terminal. It enables Claude to explore, read, and write files, execute commands, and manage processes - expanding Claude's capabilities beyond just conversation to become a comprehensive assistant that can work with your entire operating system.
+Claude Desktop Terminal Sync is an MCP (Model Context Protocol) tool that allows Claude Desktop to access and control your computer's file system and terminal. It enables Claude to explore, read, and write files, execute commands, and manage processes - expanding Claude's capabilities beyond just conversation to become a comprehensive assistant that can work with your entire operating system.
 
 ### How does it differ from coding tools like Cursor or Windsurf?
 
-Unlike tools like Cursor or Windsurf which are primarily designed as coding IDEs, Claude Desktop Commander works with Claude to provide a more flexible, solution-centric approach. It's not confined to a coding box - it can handle coding tasks but also excels at exploring codebases, drawing diagrams, running automation processes, and working with multiple projects simultaneously.
+Unlike tools like Cursor or Windsurf which are primarily designed as coding IDEs, Claude Desktop Terminal Sync works with Claude to provide a more flexible, solution-centric approach. It's not confined to a coding box - it can handle coding tasks but also excels at exploring codebases, drawing diagrams, running automation processes, and working with multiple projects simultaneously.
 
 The main differences:
 - Claude reads full files during exploration, ensuring it captures the complete structure
 - Coding tools like Windsurf & Cursor chunk and index files, sometimes missing key relationships
 - Claude generates and displays diagrams directly in chat
-- Claude Desktop Commander allows you to work across your entire system, not just within coding environments
+- Claude Desktop Terminal Sync allows you to work across your entire system, not just within coding environments
 - Claude lets you execute the changes in one go, rather than requiring constant review and approval
 
 ### What is an MCP?
@@ -89,17 +89,17 @@ MCP stands for Model Context Protocol. It's a framework that allows AI language 
 
 ### Is this an official Anthropic product?
 
-No, Claude Desktop Commander is an independent, open-source project developed by Eduard Ruzga and other contributors. It's not an official Anthropic product, though it works with Anthropic's Claude Desktop application.
+No, Claude Desktop Terminal Sync is an independent, open-source project developed by Eduard Ruzga and other contributors. It's not an official Anthropic product, though it works with Anthropic's Claude Desktop application.
 
 ## Cost & Value
 
-### How much does it cost to use Claude Desktop Commander?
+### How much does it cost to use Claude Desktop Terminal Sync?
 
-Claude Desktop Commander itself is free and open-source. However, to use it, you need a Claude Pro subscription, which costs $20/month. There are no additional charges beyond this subscription fee.
+Claude Desktop Terminal Sync itself is free and open-source. However, to use it, you need a Claude Pro subscription, which costs $20/month. There are no additional charges beyond this subscription fee.
 
 ### How does the pricing compare to Claude Code or other AI coding tools?
 
-Claude Desktop Commander with Claude Pro is generally more cost-effective than alternatives:
+Claude Desktop Terminal Sync with Claude Pro is generally more cost-effective than alternatives:
 - It costs a flat $20/month (Claude Pro subscription)
 - Claude Code uses an API with per-token pricing, which users report can quickly become expensive (some report spending hundreds of dollars)
 - Tools like Cursor or Windsurf have their own subscription costs that may be in addition to other AI services
@@ -108,18 +108,18 @@ Many users find the flat fee approach more predictable and often more affordable
 
 ### Do I need API credits to use this tool?
 
-No. Claude Desktop Commander works with the Claude Desktop application's standard Pro subscription, not with API calls. You won't incur additional costs beyond the Claude Pro subscription fee.
+No. Claude Desktop Terminal Sync works with the Claude Desktop application's standard Pro subscription, not with API calls. You won't incur additional costs beyond the Claude Pro subscription fee.
 
 ## Installation & Setup
 
-### What are the prerequisites for using Claude Desktop Commander?
+### What are the prerequisites for using Claude Desktop Terminal Sync?
 
 You'll need:
 - Node.js version 18 or higher installed on your system
 - Claude Desktop installed and running
 - A Claude Pro subscription ($20/month)
 
-### How do I install Claude Desktop Commander?
+### How do I install Claude Desktop Terminal Sync?
 
 There are several ways to install:
 
@@ -166,23 +166,23 @@ Make sure you have Node.js version 18 or higher installed, as older versions may
 
 ### Which operating systems does it support?
 
-Claude Desktop Commander works with:
+Claude Desktop Terminal Sync works with:
 - Windows (ongoing improvements for better Windows support)
 - macOS
 - Linux (with ongoing enhancements for various distributions)
 
 Work is in progress to improve WSL (Windows Subsystem for Linux) integration and add SSH support for remote servers.
 
-### How do I get started after installing Desktop Commander?
+### How do I get started after installing Desktop Terminal Sync?
 
-After installation, Desktop Commander includes intelligent onboarding to help new users discover its capabilities:
+After installation, Desktop Terminal Sync includes intelligent onboarding to help new users discover its capabilities:
 
-**Automatic Onboarding:** When you're a new user (fewer than 10 successful commands), Claude will automatically offer helpful getting-started guidance and tutorials after you use Desktop Commander successfully.
+**Automatic Onboarding:** When you're a new user (fewer than 10 successful commands), Claude will automatically offer helpful getting-started guidance and tutorials after you use Desktop Terminal Sync successfully.
 
 **Manual Onboarding:** You can also request onboarding help at any time by simply asking Claude:
-- "Help me get started with Desktop Commander"
-- "Show me Desktop Commander examples"
-- "What can I do with Desktop Commander?"
+- "Help me get started with Desktop Terminal Sync"
+- "Show me Desktop Terminal Sync examples"
+- "What can I do with Desktop Terminal Sync?"
 
 **Starter Examples:** Claude will show you beginner-friendly tutorials like:
 - Organizing your Downloads folder
@@ -193,7 +193,7 @@ After installation, Desktop Commander includes intelligent onboarding to help ne
 
 ## Features & Capabilities
 
-### What can I do with Claude Desktop Commander?
+### What can I do with Claude Desktop Terminal Sync?
 
 The tool enables a wide range of tasks:
 
@@ -239,7 +239,7 @@ Yes! Claude can start a program (like SSH or database connection) and send multi
 
 ### How does it handle file editing and URL content?
 
-Claude Desktop Commander provides two main approaches to file editing and supports URL content:
+Claude Desktop Terminal Sync provides two main approaches to file editing and supports URL content:
 
 1. **Surgical text replacements (`edit_block`):**
    - Best for small changes (<20% of file size)
@@ -279,7 +279,7 @@ This makes it particularly useful for onboarding to new projects or reviewing un
 
 ### How does it handle long-running commands and searches?
 
-Claude Desktop Commander has a sophisticated system for managing commands and operations that may take a while to complete:
+Claude Desktop Terminal Sync has a sophisticated system for managing commands and operations that may take a while to complete:
 
 1. The `execute_command` function returns after a timeout with initial output
 2. The command continues running in the background
@@ -296,16 +296,16 @@ This allows Claude to manage processes that would normally exceed conversation t
 
 ### Can I use it for non-coding tasks?
 
-Absolutely. While it excels at coding-related tasks, Claude Desktop Commander can be used for many system tasks:
+Absolutely. While it excels at coding-related tasks, Claude Desktop Terminal Sync can be used for many system tasks:
 - File organization and management
 - Media processing (video compression, image conversion)
 - System monitoring and maintenance
 - Running and managing any terminal-based tools
 - Data processing and analysis
 
-### How does Desktop Commander collect feedback and usage data?
+### How does Desktop Terminal Sync collect feedback and usage data?
 
-Desktop Commander has three separate data collection systems:
+Desktop Terminal Sync has three separate data collection systems:
 
 **1. Personal Usage Analytics (Local Only, Always Active):**
 - Collects usage statistics stored **locally on your machine only**
@@ -319,7 +319,7 @@ Desktop Commander has three separate data collection systems:
 - **Can be disabled** by asking: **"Disable telemetry"**
 
 **3. Feedback System (User Controlled):**
-- Use the `give_feedback_to_desktop_commander` tool to provide feedback about Desktop Commander
+- Use the `give_feedback_to_desktop_commander` tool to provide feedback about Desktop Terminal Sync
 - Opens a browser-based feedback form to send suggestions and feedback to the development team
 - Pre-fills basic usage statistics (tool call count, days using, platform) for context
 - **You can edit or remove any pre-filled information** before submitting
@@ -339,11 +339,11 @@ If you don't want to see periodic feedback requests, you can disable them:
 
 **Simple method:** Ask in chat: **"Set feedbackGiven to true"**
 
-This will stop Desktop Commander from showing feedback prompts while keeping all other functionality intact.
+This will stop Desktop Terminal Sync from showing feedback prompts while keeping all other functionality intact.
 
-### Does Desktop Commander work in Docker containers?
+### Does Desktop Terminal Sync work in Docker containers?
 
-Yes! Desktop Commander can be run in Docker containers for **complete isolation from your host system**, providing **zero risk to your computer**. This is perfect for testing, development, or when you want complete sandboxing.
+Yes! Desktop Terminal Sync can be run in Docker containers for **complete isolation from your host system**, providing **zero risk to your computer**. This is perfect for testing, development, or when you want complete sandboxing.
 
 **Installation:**
 1. Install Docker for Windows/Mac from [docker.com](https://www.docker.com/products/docker-desktop/)
@@ -367,19 +367,19 @@ read_file({ path: "server.log", offset: -10 })
 
 This is useful for checking recent log entries or file endings without reading the entire content.
 
-### Can I use Desktop Commander in any MCP client outside of Claude?
+### Can I use Desktop Terminal Sync in any MCP client outside of Claude?
 
-Yes, you can install Desktop Commander MCP on other clients that support MCP, including:
+Yes, you can install Desktop Terminal Sync on other clients that support MCP, including:
 - Cursor
 - Windsurf 
 - DeepChat
 - Any other client with MCP support
 
-You can use any model available for that client with Desktop Commander.
+You can use any model available for that client with Desktop Terminal Sync.
 
 **However, important caveats:**
-- **Unexpected behavior**: Desktop Commander can work unexpectedly on other clients due to differences in system prompts and potential conflicts with their own built-in tools
-- **Not optimized for other clients**: Desktop Commander is primarily designed and tested with Claude Desktop
+- **Unexpected behavior**: Desktop Terminal Sync can work unexpectedly on other clients due to differences in system prompts and potential conflicts with their own built-in tools
+- **Not optimized for other clients**: Desktop Terminal Sync is primarily designed and tested with Claude Desktop
 - **Varying results**: The experience may differ significantly from the Claude Desktop experience
 
 **If you try other clients:**
@@ -387,7 +387,7 @@ You can use any model available for that client with Desktop Commander.
 - Be aware that some features may not work as expected
 - Consider reporting your experience to help improve compatibility
 
-We welcome feedback from users who try Desktop Commander with other MCP clients to help us understand compatibility and improve the experience across different platforms.
+We welcome feedback from users who try Desktop Terminal Sync with other MCP clients to help us understand compatibility and improve the experience across different platforms.
 
 ## Security & Permissions
 
@@ -395,7 +395,7 @@ We welcome feedback from users who try Desktop Commander with other MCP clients 
 
 ### Is it safe to give Claude access to my file system?
 
-Claude Desktop Commander has known security limitations:
+Claude Desktop Terminal Sync has known security limitations:
 
 - Directory restrictions can be bypassed via symlinks and terminal commands
 - Command blocking can be bypassed via command substitution and absolute paths  
@@ -415,7 +415,7 @@ Command blocking exists but can be bypassed through various methods. The current
 
 Please create a [GitHub Issue](https://github.com/wonderwhy-er/DesktopCommanderMCP/issues) with detailed information about any security vulnerabilities you discover. See our [Security Policy](SECURITY.md) for full guidelines.
 
-Claude Desktop Commander doesn't have a pre-defined blocklist, but you can use the `block_command` and `unblock_command` functions to manage which commands Claude can execute. It's recommended to block commands that could potentially be destructive, such as `rm -rf` or `format`.
+Claude Desktop Terminal Sync doesn't have a pre-defined blocklist, but you can use the `block_command` and `unblock_command` functions to manage which commands Claude can execute. It's recommended to block commands that could potentially be destructive, such as `rm -rf` or `format`.
 
 ### Why is the fileWriteLineLimit set to 50 by default? What is the maximum value?
 
@@ -458,7 +458,7 @@ For extremely large monorepo projects, you may need to direct Claude to specific
 
 ### Can it work with multiple repositories simultaneously?
 
-Yes, one of Claude Desktop Commander's strengths is its ability to work across different projects or repositories at the same time. This is particularly useful for:
+Yes, one of Claude Desktop Terminal Sync's strengths is its ability to work across different projects or repositories at the same time. This is particularly useful for:
 - Migrating features between codebases
 - Comparing implementations
 - Applying consistent changes across multiple projects
@@ -466,12 +466,12 @@ Yes, one of Claude Desktop Commander's strengths is its ability to work across d
 
 ### Is it suitable for non-technical users?
 
-Claude Desktop Commander requires some basic technical knowledge, particularly:
+Claude Desktop Terminal Sync requires some basic technical knowledge, particularly:
 - Understanding of file systems
 - Basic terminal/command line knowledge
 - Ability to install and configure Node.js applications
 
-For complete beginners, platforms like Loveable might be easier as they handle deployment and server-side aspects. However, if you're comfortable with basic technical concepts and want more control, Claude Desktop Commander can be a good option, especially if you've had issues with other platforms.
+For complete beginners, platforms like Loveable might be easier as they handle deployment and server-side aspects. However, if you're comfortable with basic technical concepts and want more control, Claude Desktop Terminal Sync can be a good option, especially if you've had issues with other platforms.
 
 ## Troubleshooting
 
@@ -497,7 +497,7 @@ Claude Desktop has certain limits on message size. When working with large codeb
 
 ### Installation fails on my system
 
-If you're having trouble installing Claude Desktop Commander:
+If you're having trouble installing Claude Desktop Terminal Sync:
 
 1. Check Node.js version: `node -v` (should be v18 or higher)
 2. Ensure you have proper permissions to install npm packages
@@ -536,7 +536,7 @@ To ensure you don't lose important work:
 
 ### Should I still use a code editor?
 
-Yes, for most users, having a code editor is still valuable. Claude Desktop Commander works well alongside traditional development tools, rather than completely replacing them.
+Yes, for most users, having a code editor is still valuable. Claude Desktop Terminal Sync works well alongside traditional development tools, rather than completely replacing them.
 
 Typical workflow:
 1. Use Claude to implement changes or explore code
@@ -553,7 +553,7 @@ Some users report reviewing code only after Claude has made it work, focusing on
 
 Tools like Cline are great options that integrate directly with VSCode. The main differences are:
 
-**Claude Desktop Commander:**
+**Claude Desktop Terminal Sync:**
 - Works across your entire system, not just within the editor
 - Can handle automation, terminal commands, and long-running processes
 - Fixed cost with Claude Pro subscription
@@ -570,9 +570,9 @@ Many users employ both, using the right tool for different tasks.
 
 ### Is this better than using Jupyter notebooks with Claude?
 
-Jupyter notebooks and Claude Desktop Commander serve different purposes:
+Jupyter notebooks and Claude Desktop Terminal Sync serve different purposes:
 
-**Claude Desktop Commander:**
+**Claude Desktop Terminal Sync:**
 - System-wide access to files and terminal
 - Can work with any project type or language
 - Full development workflow support
@@ -584,4 +584,4 @@ Jupyter notebooks and Claude Desktop Commander serve different purposes:
 - Visual output for data visualization
 - More structured for educational purposes
 
-For data science or analysis projects, you might use both: Claude Desktop Commander for system tasks and code management, and Jupyter for interactive exploration and visualization.
+For data science or analysis projects, you might use both: Claude Desktop Terminal Sync for system tasks and code management, and Jupyter for interactive exploration and visualization.

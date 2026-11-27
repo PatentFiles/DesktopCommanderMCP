@@ -1,5 +1,5 @@
 /**
- * Four ways config.json can fail Desktop Commander, and what the user keeps:
+ * Four ways config.json can fail Desktop Terminal Sync, and what the user keeps:
  *
  * 1. A corrupt config.json that can't be read again while it is recovered (EBUSY:
  *    a file scanner holds it) is not recovered as if it were empty, which would

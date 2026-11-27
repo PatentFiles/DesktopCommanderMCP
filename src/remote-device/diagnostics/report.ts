@@ -347,7 +347,7 @@ function checkRealtime(supabaseUrl: string, key: string): Promise<{ openedMs?: n
     });
 }
 
-// --- Desktop Commander MCP running now ----------------------------------------------------
+// --- Desktop Terminal Sync running now ----------------------------------------------------
 
 interface ProcessInfo { pid: number; parentPid: number; startedAt: number; command: string }
 
@@ -389,7 +389,7 @@ function listProcesses(): Promise<ProcessInfo[]> {
     });
 }
 
-/** Whether `file` is Desktop Commander's dist/index.js: a bin link is followed, then the package.json beside dist/ named. */
+/** Whether `file` is Desktop Terminal Sync's dist/index.js: a bin link is followed, then the package.json beside dist/ named. */
 function isDesktopCommanderEntry(file: string, packageNames: Map<string, string | null>): boolean {
     let entry: string;
     try {
@@ -410,7 +410,7 @@ function isDesktopCommanderEntry(file: string, packageNames: Map<string, string 
 }
 
 /**
- * Processes running Desktop Commander's MCP server: a command line with its
+ * Processes running Desktop Terminal Sync's MCP server: a command line with its
  * dist/index.js (started by an MCP client, npx, or `remote`'s local MCP), not
  * followed by `remote` / `setup` / `remove`, and not this report. A shell
  * wrapping it names only a bin, which doesn't resolve, so it isn't counted
@@ -489,7 +489,7 @@ function deviceState(home: string): DiagnosticsReport['device'] {
 
 function settings(home: string): DiagnosticsReport['settings'] {
     try {
-        // As Desktop Commander reads it: a file saved with a UTF-8 BOM too
+        // As Desktop Terminal Sync reads it: a file saved with a UTF-8 BOM too
         const config = parseConfig(fs.readFileSync(path.join(home, '.claude-server-commander', 'config.json'), 'utf8'));
         const clientId = typeof config?.clientId === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(config.clientId) ? config.clientId : null;
         return {
@@ -692,13 +692,13 @@ export function formatReport(report: DiagnosticsReport): string {
     const lines: string[] = [];
     const { versions, clock, network, device, settings: config, deviceLog: log } = report;
 
-    lines.push(`Desktop Commander diagnostics — ${localTimestamp(new Date(report.createdAt))}`);
+    lines.push(`Desktop Terminal Sync diagnostics — ${localTimestamp(new Date(report.createdAt))}`);
     lines.push('This file contains: versions, how Node runs (paths, with the home folder as ~), clock, network checks, ' +
         'the device id and whether sign-in data exists (yes/no), device status history.');
     lines.push('It does not contain: tokens, passwords, emails, the user name, tool arguments or results.');
     lines.push('');
 
-    lines.push(`${label('Versions')}Desktop Commander ${versions.desktopCommander} · Node ${versions.node} · ` +
+    lines.push(`${label('Versions')}Desktop Terminal Sync ${versions.desktopCommander} · Node ${versions.node} · ` +
         `npm ${versions.npm ?? 'not found'} · ${versions.os.name} (${versions.os.release}) ${versions.os.arch}`);
     lines.push(`${label('Node')}${versions.nodePath} (${versions.nodeKind})`);
     lines.push(`${label('Running')}${versions.entryPath} (${versions.runKind})`);
@@ -799,7 +799,7 @@ export async function runReport(): Promise<void> {
     }
     try {
         const id = await uploadReport(zip, { diagnosticsUrl, userId: savedUserId(os.homedir()), deviceId: report.device.id });
-        console.log(`Sent to Desktop Commander support. Report id: ${id}`);
+        console.log(`Sent to Desktop Terminal Sync support. Report id: ${id}`);
         console.log('Give this id to support. We keep it for 7 days, then delete it.');
     } catch (error) {
         // The zip is saved either way

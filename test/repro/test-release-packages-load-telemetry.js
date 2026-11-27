@@ -27,7 +27,7 @@ const env = {
   npm_config_audit: 'false',
   npm_config_fund: 'false',
   npm_config_update_notifier: 'false',
-  DESKTOP_COMMANDER_DISABLE_TELEMETRY: '1',
+  DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY: '1',
   PUPPETEER_SKIP_DOWNLOAD: '1',
 };
 

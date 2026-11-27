@@ -33,7 +33,7 @@ import assert from 'assert';
 import { performance } from 'perf_hooks';
 import { exitProcess } from '../../dist/utils/exit-process.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = 'true';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = 'true';
 
 const { terminalManager, MAX_BUFFERED_OUTPUT_CHARS } = await import('../../dist/terminal-manager.js');
 

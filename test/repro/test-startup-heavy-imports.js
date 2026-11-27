@@ -1,4 +1,4 @@
-// Repro (#715): Desktop Commander takes 25-90 s to answer the MCP `initialize`
+// Repro (#715): Desktop Terminal Sync takes 25-90 s to answer the MCP `initialize`
 // request on the reporter's Windows 11 machine (Node 24.14, 0.2.50 local
 // clone), one core busy for ~25 s, and the client gives up; loading the
 // Excel, PDF and DOCX packages on first use brought it to 8-10 s there.

@@ -1,6 +1,6 @@
 # Remote device launchers
 
-These scripts start Remote Desktop Commander on your computer. If Node.js cannot be found, they explain what will be installed and ask you to type **Yes** or **No**. Yes or pressing Enter installs Node.js 24, then downloads and starts Remote Desktop Commander. No or an unrecognized answer stops without installing or starting anything. It shows two options: first, download Node.js using a direct link for your computer; second, run the command yourself in a new terminal if Node.js is already installed. If an answer cannot be read, nothing is installed. If compatible Node.js is found, setup starts Remote Desktop Commander without asking again.
+These scripts start Desktop Terminal Sync Remote on your computer. If Node.js cannot be found, they explain what will be installed and ask you to type **Yes** or **No**. Yes or pressing Enter installs Node.js 24, then downloads and starts Desktop Terminal Sync Remote. No or an unrecognized answer stops without installing or starting anything. It shows two options: first, download Node.js using a direct link for your computer; second, run the command yourself in a new terminal if Node.js is already installed. If an answer cannot be read, nothing is installed. If compatible Node.js is found, setup starts Desktop Terminal Sync Remote without asking again.
 
 The manual links point directly to Node.js v24.22.1 files, so showing them needs no internet connection. macOS gets a universal installer; Windows and supported Linux computers get the matching processor version. Opening a link downloads the file. macOS and Windows users can open it to install Node.js; Linux users must install the downloaded archive themselves. Unsupported processors receive a link to [the Node.js download page](https://nodejs.org/en/download) instead of an incompatible file. Keep these pinned links in sync with the onboarding page's manual downloads.
 
@@ -44,7 +44,7 @@ Node.js 22.12+ is reused. Messages asking users to upgrade, reinstall or manuall
 - **Windows:** the official `.msi` with its normal installation directory, usually `C:\Program Files\nodejs`.
 - **Linux:** the official binary archive under `/usr/local`, Node.js's [default installation prefix](https://github.com/nodejs/node/blob/v24.x/configure.py#L76-L80). This installation is not managed by the distribution's package manager.
 
-The launcher then runs `npx --yes @wonderwhy-er/desktop-commander@latest remote` (`npx.cmd` on Windows). This downloads the package into npm's cache and starts it; `--yes` accepts npm's package download prompt. Only Node installation is elevated; Desktop Commander runs as the user who started the command. No shell-profile or execution-policy changes are needed.
+The launcher then runs `npx --yes @wonderwhy-er/desktop-commander@latest remote` (`npx.cmd` on Windows). This downloads the package into npm's cache and starts it; `--yes` accepts npm's package download prompt. Only Node installation is elevated; Desktop Terminal Sync runs as the user who started the command. No shell-profile or execution-policy changes are needed.
 
 Subsequent runs reuse the installed runtime. The launcher makes it available to the current command; open a new terminal to pick up installer changes to PATH. Earlier private installations are not deleted.
 

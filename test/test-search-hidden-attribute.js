@@ -147,7 +147,7 @@ export default async function runTests() {
     for (const stem of [...VISIBLE, ...ATTR_HIDDEN_FILES, ...IN_ATTR_HIDDEN_DIR]) {
       const base = path.join(TEST_DIR, ...stem.split('/'));
       await fs.writeFile(`${base}.txt`, 'needle\n');
-      // Real Office files, written by Desktop Commander's own Excel and DOCX handlers
+      // Real Office files, written by Desktop Terminal Sync's own Excel and DOCX handlers
       await writeFile(`${base}.xlsx`, JSON.stringify([['needle report']]));
       await writeFile(`${base}.docx`, 'needle report');
     }

@@ -1,4 +1,4 @@
-# Release Guide for Desktop Commander MCP
+# Release Guide for Desktop Terminal Sync
 
 Releases are published by CI (`.github/workflows/release.yml`). A release goes to
 **four places from one trigger**:

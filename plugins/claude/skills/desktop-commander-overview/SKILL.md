@@ -1,17 +1,17 @@
 ---
 name: desktop-commander-overview
-description: Use for Desktop Commander MCP capabilities — persistent shells and REPLs, long-running processes, filesystem beyond the workspace, structured files (.xlsx, .docx, .pdf, images) and large local data files such as CSVs, ripgrep search at scale, SSH, or cross-turn state.
+description: Use for Desktop Terminal Sync capabilities — persistent shells and REPLs, long-running processes, filesystem beyond the workspace, structured files (.xlsx, .docx, .pdf, images) and large local data files such as CSVs, ripgrep search at scale, SSH, or cross-turn state.
 version: 0.1.0
 audience: agent
 ---
 
-# Desktop Commander MCP
+# Desktop Terminal Sync
 
-Desktop Commander gives the agent reach across the user's actual computer — files, folders, terminals, processes, structured documents, and remote machines reachable over SSH. The tools' detailed schemas (parameters, return shapes, format-specific behavior) live in the MCP itself; this skill explains what they enable and how they compose into common workflows.
+Desktop Terminal Sync gives the agent reach across the user's actual computer — files, folders, terminals, processes, structured documents, and remote machines reachable over SSH. The tools' detailed schemas (parameters, return shapes, format-specific behavior) live in the MCP itself; this skill explains what they enable and how they compose into common workflows.
 
 ## What this MCP gives the agent
 
-**Persistent shell sessions.** Desktop Commander keeps a started process or session alive across tool calls. Inside a single long-lived shell, REPL, or SSH session, state carries forward — environment variables, working directory, activated virtualenvs, open connections, REPL variables — so the agent can `cd`, activate a venv, then send commands or code into that same session many turns later without re-setup. (Note: separate `start_process` calls open separate sessions and do **not** share shell state with each other; persistence is inside one session, not across them.)
+**Persistent shell sessions.** Desktop Terminal Sync keeps a started process or session alive across tool calls. Inside a single long-lived shell, REPL, or SSH session, state carries forward — environment variables, working directory, activated virtualenvs, open connections, REPL variables — so the agent can `cd`, activate a venv, then send commands or code into that same session many turns later without re-setup. (Note: separate `start_process` calls open separate sessions and do **not** share shell state with each other; persistence is inside one session, not across them.)
 
 **Long-running processes.** Start a dev server, watcher, build, training run, or test suite in the background and keep working. The MCP returns a process handle the agent can tail, interact with, or terminate across many turns. Long-running commands don't need to block the workflow waiting for a foreground command to exit.
 

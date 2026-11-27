@@ -90,7 +90,7 @@ async function parent() {
       HOME: home,
       USERPROFILE: home,
       DC_CONFIG_CORRUPT_WORKER: '1',
-      DESKTOP_COMMANDER_DISABLE_TELEMETRY: '1',
+      DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY: '1',
     },
     stdio: ['ignore', 'inherit', 'inherit', 'ipc'],
   });

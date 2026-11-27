@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Build script for creating Desktop Commander MCPB bundle
+ * Build script for creating Desktop Terminal SyncB bundle
  * 
  * This script:
  * 1. Builds the TypeScript project
@@ -19,7 +19,7 @@ const PROJECT_ROOT = path.resolve(__dirname, '..');
 const BUNDLE_DIR = path.join(PROJECT_ROOT, 'mcpb-bundle');
 const MANIFEST_PATH = path.join(BUNDLE_DIR, 'manifest.json');
 
-console.log('🏗️  Building Desktop Commander MCPB Bundle...');
+console.log('🏗️  Building Desktop Terminal SyncB Bundle...');
 
 // Step 0: Download all ripgrep binaries for cross-platform support
 console.log('🌍 Downloading ripgrep binaries for all platforms...');
@@ -195,7 +195,7 @@ try {
 }
 
 console.log('');
-console.log('🎉 Desktop Commander MCPB bundle is ready!');
+console.log('🎉 Desktop Terminal SyncB bundle is ready!');
 console.log('');
 console.log('Next steps:');
 console.log('1. Test the bundle by installing it in Claude Desktop:');

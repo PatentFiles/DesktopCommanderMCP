@@ -51,7 +51,7 @@ async function setup() {
   await fs.mkdir(TEST_DIR, { recursive: true });
   await configManager.setValue('allowedDirectories', [TEST_DIR]);
 
-  // Real Office files, written by Desktop Commander's own Excel and DOCX handlers.
+  // Real Office files, written by Desktop Terminal Sync's own Excel and DOCX handlers.
   // Each spreadsheet holds the text once, in its last row.
   const rows = Array.from({ length: XLSX_ROWS - 1 }, (_, i) => [`Item ${i}`, `Note ${i}`]);
   rows.push(['Alice', `${SEARCH_TEXT} budget`]);

@@ -241,7 +241,7 @@ async function main() {
   const options = readRunnerArgs(process.argv.slice(2), path.join(ROOT, 'test-results', 'suite'));
 
   try {
-    console.log(`${colors.bold}${colors.cyan}===== DESKTOP COMMANDER TEST RUNNER =====${colors.reset}`);
+    console.log(`${colors.bold}${colors.cyan}===== DESKTOP TERMINAL SYNC TEST RUNNER =====${colors.reset}`);
     console.log(`${colors.blue}Starting test execution at ${new Date().toISOString()}${colors.reset}\n`);
 
     // Build the project first

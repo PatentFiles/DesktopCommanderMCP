@@ -16,7 +16,7 @@ import { RemoteChannel } from '../dist/remote-device/remote-channel.js';
 import { rolloutManager } from '../dist/remote-device/rollouts.js';
 import { runIfMain } from './helpers/run-if-main.js';
 
-process.env.DESKTOP_COMMANDER_DISABLE_TELEMETRY = '1';
+process.env.DESKTOP_TERMINAL_SYNC_DISABLE_TELEMETRY = '1';
 
 const ANON_KEY = 'sb_publishable_TESTKEY_do_not_use_on_a_socket';
 const USER_JWT = 'eyJ-user-jwt';

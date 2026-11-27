@@ -50,9 +50,9 @@ function Write-Host {
 function Read-Host {
     param($Prompt)
     $script:prompts++
-    Assert ($script:hostMessages[-4] -eq 'Remote Desktop Commander needs Node.js, which could not be found on this computer.') 'Explain why Node.js is needed without assuming it is not installed.'
+    Assert ($script:hostMessages[-4] -eq 'Desktop Terminal Sync Remote needs Node.js, which could not be found on this computer.') 'Explain why Node.js is needed without assuming it is not installed.'
     Assert ($script:hostMessages[-3] -eq '') 'Separate the Node.js explanation from the Yes explanation with a blank line.'
-    Assert ($script:hostMessages[-2] -eq 'If you choose Yes, we will install Node.js 24, then download and start Remote Desktop Commander.') 'Explain both installation and device startup before asking for consent.'
+    Assert ($script:hostMessages[-2] -eq 'If you choose Yes, we will install Node.js 24, then download and start Desktop Terminal Sync Remote.') 'Explain both installation and device startup before asking for consent.'
     Assert ($script:hostMessages[-1] -eq '') 'Separate the Yes explanation from the prompt with a blank line.'
     Assert ($Prompt -eq 'Would you like to continue? Type Yes or No (press Enter for Yes)') 'Consent must offer Yes/No with Yes as the Enter default.'
     if ($script:promptFailure) { throw 'Fixture prompt unavailable' }
@@ -191,7 +191,7 @@ try {
     Run-Launcher 'Your Node.js installation is incomplete'
     $script:missingNpx = $false
     $script:commandExit = 7
-    Run-Launcher 'Remote Desktop Commander stopped unexpectedly'
+    Run-Launcher 'Desktop Terminal Sync Remote stopped unexpectedly'
     # Node SIGINT is 128 + 2 = 130; https://nodejs.org/api/process.html#exit-codes
     # Windows Ctrl+C is STATUS_CONTROL_C_EXIT (0xC000013A); https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55
     foreach ($exitCode in @(130, 0xC000013A)) {
