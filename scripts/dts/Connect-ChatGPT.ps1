@@ -37,6 +37,8 @@ Write-Host 'Your API key will not be written to disk by this script.'
 # -UseClipboardKey reads a freshly copied key without putting it in command history.
 # Never print the key; clear the clipboard after transferring it to this process.
 if ($UseClipboardKey) {
+    Write-Host 'Copy the complete runtime API key in your browser, then come back and press Enter here. Do not paste it into PowerShell.' -ForegroundColor Cyan
+    [void](Read-Host 'Press Enter after copying your key')
     $key = (Get-Clipboard -Raw)
     if ($null -eq $key) { $key = '' }
     $key = $key.Trim()
